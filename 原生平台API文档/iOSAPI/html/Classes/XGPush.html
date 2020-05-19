@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>XGPush Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">iOSAPI </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">陕西风云在线</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/)">)</option>
+		
+		<option value="//api/name/delegate">delegate</option>
+		
+		<option value="//api/name/deviceDidRegisteredXG">deviceDidRegisteredXG</option>
+		
+		<option value="//api/name/enableDebug">enableDebug</option>
+		
+		<option value="//api/name/notificationConfigure">notificationConfigure</option>
+		
+		<option value="//api/name/xgApplicationBadgeNumber">xgApplicationBadgeNumber</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/defaultManager">+ defaultManager</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/deviceNotificationIsAllowed:">- deviceNotificationIsAllowed:</option>
+		
+		<option value="//api/name/reportLocationWithLatitude:longitude:">- reportLocationWithLatitude:longitude:</option>
+		
+		<option value="//api/name/reportXGNotificationInfo:">- reportXGNotificationInfo:</option>
+		
+		<option value="//api/name/reportXGNotificationResponse:">- reportXGNotificationResponse:</option>
+		
+		<option value="//api/name/sdkVersion">- sdkVersion</option>
+		
+		<option value="//api/name/setBadge:">- setBadge:</option>
+		
+		<option value="//api/name/startXGWithAppID:appKey:delegate:">- startXGWithAppID:appKey:delegate:</option>
+		
+		<option value="//api/name/stopXGNotification">- stopXGNotification</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">XGPush Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>XGPush.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/defaultManager" title="defaultManager"></a>
+	<h3 class="method-title"><code><a href="#//api/name/defaultManager">+&nbsp;defaultManager</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取信鸽推送管理的单例对象</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (nonnull instancetype)defaultManager</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>信鸽推送对象</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>关于信鸽推送SDK接口协议的对象</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (weak, nonatomic, nullable, readonly) id&lt;XGPushDelegate&gt; delegate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/notificationConfigure" title="notificationConfigure"></a>
+	<h3 class="method-title"><code><a href="#//api/name/notificationConfigure">&nbsp;&nbsp;notificationConfigure</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>信鸽推送管理对象，管理推送的配置选项，例如，注册推送的样式</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nullable, strong, nonatomic) XGNotificationConfigure *notificationConfigure</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/enableDebug" title="enableDebug"></a>
+	<h3 class="method-title"><code><a href="#//api/name/enableDebug">&nbsp;&nbsp;enableDebug</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>这个开关表明是否打印信鸽SDK的日志信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (assign, getter=isEnableDebug) BOOL enableDebug</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/)" title=")"></a>
+	<h3 class="method-title"><code><a href="#//api/name/)">&nbsp;&nbsp;)</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>返回信鸽推送服务的状态</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (assign, readonly) BOOL xgNotificationStatus __deprecated_msg ( &quot;XG SDK 3.3+, instead, you can use deviceTokenDidRegisteredXGService property&quot; )</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/deviceDidRegisteredXG" title="deviceDidRegisteredXG"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deviceDidRegisteredXG">&nbsp;&nbsp;deviceDidRegisteredXG</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设备在信鸽服务中的是否处于注册状态</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (assign, readonly) BOOL deviceDidRegisteredXG</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/xgApplicationBadgeNumber" title="xgApplicationBadgeNumber"></a>
+	<h3 class="method-title"><code><a href="#//api/name/xgApplicationBadgeNumber">&nbsp;&nbsp;xgApplicationBadgeNumber</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>管理应用角标</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonatomic) NSInteger xgApplicationBadgeNumber</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startXGWithAppID:appKey:delegate:" title="startXGWithAppID:appKey:delegate:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startXGWithAppID:appKey:delegate:">&ndash;&nbsp;startXGWithAppID:appKey:delegate:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>通过使用在信鸽官网注册的应用的信息，启动信鸽推送服务</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)startXGWithAppID:(uint32_t)<em>appID</em> appKey:(nonnull NSString *)<em>appKey</em> delegate:(nullable id&lt;XGPushDelegate&gt;)<em>delegate</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>appID</code></th>
+						<td><p>通过前台申请的应用ID</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>appKey</code></th>
+						<td><p>通过前台申请的appKey</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>delegate</code></th>
+						<td><p>回调对象</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 接口所需参数必须要正确填写，反之信鸽服务将不能正确为应用推送消息</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/stopXGNotification" title="stopXGNotification"></a>
+	<h3 class="method-title"><code><a href="#//api/name/stopXGNotification">&ndash;&nbsp;stopXGNotification</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>停止信鸽推送服务</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)stopXGNotification</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 调用此方法将导致当前设备不再接受信鸽服务推送的消息.如果再次需要接收信鸽服务的消息推送，则必须需要再次调用startXG:withAppKey:delegate:方法重启信鸽推送服务</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reportXGNotificationInfo:" title="reportXGNotificationInfo:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reportXGNotificationInfo:">&ndash;&nbsp;reportXGNotificationInfo:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>上报应用收到的推送信息，以便信鸽服务能够统计相关数据，包括但不限于：1.推送消息被点击的次数，2.消息曝光的次数</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)reportXGNotificationInfo:(nonnull NSDictionary *)<em>info</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>info</code></th>
+						<td><p>应用接收到的推送消息对象的内容</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 请在实现application <a href="#//api/name/delegate">delegate</a> 的 application:didFinishLaunchingWithOptions:或者application:didReceiveRemoteNotification:的方法中调用此接口，参数就使用这两个方法中的NSDictionaryl类型的参数即可，从而完成推送消息的数据统计</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reportLocationWithLatitude:longitude:" title="reportLocationWithLatitude:longitude:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reportLocationWithLatitude:longitude:">&ndash;&nbsp;reportLocationWithLatitude:longitude:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>上报地理位置信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)reportLocationWithLatitude:(double)<em>latitude</em> longitude:(double)<em>longitude</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>latitude</code></th>
+						<td><p>纬度</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>longitude</code></th>
+						<td><p>经度</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setBadge:" title="setBadge:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setBadge:">&ndash;&nbsp;setBadge:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>上报当前App角标数到信鸽服务器</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)setBadge:(NSInteger)<em>badgeNumber</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>badgeNumber</code></th>
+						<td><p>应用的角标数</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 此接口是为了实现角标+1的功能，服务器会在这个数值基础上进行角标数新增的操作，调用成功之后，会覆盖之前值</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reportXGNotificationResponse:" title="reportXGNotificationResponse:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reportXGNotificationResponse:">&ndash;&nbsp;reportXGNotificationResponse:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>上报推送消息的用户行为</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)reportXGNotificationResponse:(nullable UNNotificationResponse *)<em>response</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>用户行为标识</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 此接口即统计推送消息中开发者预先设置或者是系统预置的行为标识，可以了解到用户是如何处理推送消息的，又统计消息的点击次数</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/deviceNotificationIsAllowed:" title="deviceNotificationIsAllowed:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deviceNotificationIsAllowed:">&ndash;&nbsp;deviceNotificationIsAllowed:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>查询设备通知权限是否被用户允许</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)deviceNotificationIsAllowed:(nonnull void ( ^ ) ( BOOL isAllowed ))<em>handler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>handler</code></th>
+						<td><p>查询结果的返回方法</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> iOS 10 or later 回调是异步地执行</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sdkVersion" title="sdkVersion"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sdkVersion">&ndash;&nbsp;sdkVersion</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>查看SDK的版本</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nonnull NSString *)sdkVersion</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>sdk版本号</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2020 陕西风云在线. All rights reserved. Updated: 2020-03-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

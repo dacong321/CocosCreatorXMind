@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>XGPushTokenManager Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">iOSAPI </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">陕西风云在线</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/delegate">delegate</option>
+		
+		<option value="//api/name/deviceTokenString">deviceTokenString</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/defaultTokenManager">+ defaultTokenManager</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/bindWithIdentifier:type:">- bindWithIdentifier:type:</option>
+		
+		<option value="//api/name/bindWithIdentifiers:type:">- bindWithIdentifiers:type:</option>
+		
+		<option value="//api/name/clearAllIdentifiers:">- clearAllIdentifiers:</option>
+		
+		<option value="//api/name/identifiersWithType:">- identifiersWithType:</option>
+		
+		<option value="//api/name/unbindWithIdentifer:type:">- unbindWithIdentifer:type:</option>
+		
+		<option value="//api/name/unbindWithIdentifers:type:">- unbindWithIdentifers:type:</option>
+		
+		<option value="//api/name/updateBindedIdentifiers:bindType:">- updateBindedIdentifiers:bindType:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">XGPushTokenManager Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>XGPush.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/defaultTokenManager" title="defaultTokenManager"></a>
+	<h3 class="method-title"><code><a href="#//api/name/defaultTokenManager">+&nbsp;defaultTokenManager</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>创建设备token的管理对象，用来管理token的绑定与解绑操作</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (nonnull instancetype)defaultTokenManager</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>设备token管理对象</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 此类的 APIs 调用都是以 Token 在信鸽服务上完成注册为前提</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/delegate" title="delegate"></a>
+	<h3 class="method-title"><code><a href="#//api/name/delegate">&nbsp;&nbsp;delegate</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设备token管理操作的代理对象</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (weak, nonatomic, nullable) id&lt;XGPushTokenManagerDelegate&gt; delegate</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/deviceTokenString" title="deviceTokenString"></a>
+	<h3 class="method-title"><code><a href="#//api/name/deviceTokenString">&nbsp;&nbsp;deviceTokenString</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>返回当前设备token的字符串</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (copy, nonatomic, nullable, readonly) NSString *deviceTokenString</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/bindWithIdentifier:type:" title="bindWithIdentifier:type:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/bindWithIdentifier:type:">&ndash;&nbsp;bindWithIdentifier:type:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>为token对象设置绑定类型和标识</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)bindWithIdentifier:(nonnull NSString *)<em>identifier</em> type:(XGPushTokenBindType)<em>type</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>指定绑定标识</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>指定绑定类型</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/unbindWithIdentifer:type:" title="unbindWithIdentifer:type:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/unbindWithIdentifer:type:">&ndash;&nbsp;unbindWithIdentifer:type:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据类型和标识为token对象解绑</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)unbindWithIdentifer:(nonnull NSString *)<em>identifier</em> type:(XGPushTokenBindType)<em>type</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>指定解绑标识</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>指定解绑类型</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 若需要解绑全部标签，建议使用 removeAllTags: 接口</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/identifiersWithType:" title="identifiersWithType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/identifiersWithType:">&ndash;&nbsp;identifiersWithType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据指定类型查询当前token对象绑定的标识</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (nullable NSArray *)identifiersWithType:(XGPushTokenBindType)<em>type</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>指定绑定类型</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>当前token对象绑定的标识</p>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/bindWithIdentifiers:type:" title="bindWithIdentifiers:type:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/bindWithIdentifiers:type:">&ndash;&nbsp;bindWithIdentifiers:type:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>为token对象设置绑定类型和标识</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)bindWithIdentifiers:(nonnull NSArray *)<em>identifiers</em> type:(XGPushTokenBindType)<em>type</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifiers</code></th>
+						<td><p>指定绑定标识，标签字符串不允许有空格或者是tab字符</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>指定绑定类型</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 对于账号操作，需要使用json数组，例如：
+[
+{&ldquo;account&rdquo; : &ldquo;account1&rdquo;, &ldquo;account_type&rdquo; : 1},
+{&ldquo;account&rdquo; : &ldquo;account2&rdquo;,&ldquo;account_type&rdquo; : 0}
+]
+账号类型，请参照： <a href="http://xg.qq.com/docs/server">http://xg.qq.com/docs/server</a>_api/v3/push_api_v3.html#账号类型</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/unbindWithIdentifers:type:" title="unbindWithIdentifers:type:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/unbindWithIdentifers:type:">&ndash;&nbsp;unbindWithIdentifers:type:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据类型和标识为token对象解绑</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)unbindWithIdentifers:(nonnull NSArray *)<em>identifiers</em> type:(XGPushTokenBindType)<em>type</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifiers</code></th>
+						<td><p>指定解绑标识，标签字符串不允许有空格或者是tab字符</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>指定解绑类型</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 标签字符串不允许有空格或者是tab字符；对于账号操作，需要使用json数组，例如：
+[
+{&ldquo;account&rdquo; : &ldquo;account1&rdquo;, &ldquo;account_type&rdquo; : 1},
+{&ldquo;account&rdquo; : &ldquo;account2&rdquo;,&ldquo;account_type&rdquo; : 0}
+]
+账号类型，请参照： <a href="http://xg.qq.com/docs/server">http://xg.qq.com/docs/server</a>_api/v3/push_api_v3.html#账号类型</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/updateBindedIdentifiers:bindType:" title="updateBindedIdentifiers:bindType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/updateBindedIdentifiers:bindType:">&ndash;&nbsp;updateBindedIdentifiers:bindType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据类型，覆盖原有的标识；若之前没有绑定标识，则会执行新增标识</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)updateBindedIdentifiers:(nonnull NSArray *)<em>identifiers</em> bindType:(XGPushTokenBindType)<em>type</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifiers</code></th>
+						<td><p>标签标识字符串数组，标签字符串不允许有空格或者是tab字符</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>标识类型</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 若指定为标签类型，此接口会将当前 Token 对应的旧有的标签全部替换为当前的标签；若指定账号类型，对于账号操作，则需要使用json数组，例如：
+[
+{&ldquo;account&rdquo; : &ldquo;account1&rdquo;, &ldquo;account_type&rdquo; : 1},
+{&ldquo;account&rdquo; : &ldquo;account2&rdquo;,&ldquo;account_type&rdquo; : 0}
+]
+账号类型，请参照： <a href="http://xg.qq.com/docs/server">http://xg.qq.com/docs/server</a>_api/v3/push_api_v3.html#账号类型</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/clearAllIdentifiers:" title="clearAllIdentifiers:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/clearAllIdentifiers:">&ndash;&nbsp;clearAllIdentifiers:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>根据标识类型，清除所有标识</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)clearAllIdentifiers:(XGPushTokenBindType)<em>type</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>标识类型</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2020 陕西风云在线. All rights reserved. Updated: 2020-03-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

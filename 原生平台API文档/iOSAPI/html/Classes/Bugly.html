@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Bugly Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">iOSAPI </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">陕西风云在线</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/allUserValues">+ allUserValues</option>
+		
+		<option value="//api/name/buglyDeviceId">+ buglyDeviceId</option>
+		
+		<option value="//api/name/currentTag">+ currentTag</option>
+		
+		<option value="//api/name/isAppCrashedOnStartUpExceedTheLimit">+ isAppCrashedOnStartUpExceedTheLimit</option>
+		
+		<option value="//api/name/reportError:">+ reportError:</option>
+		
+		<option value="//api/name/reportException:">+ reportException:</option>
+		
+		<option value="//api/name/reportExceptionWithCategory:name:reason:callStack:extraInfo:terminateApp:">+ reportExceptionWithCategory:name:reason:callStack:extraInfo:terminateApp:</option>
+		
+		<option value="//api/name/sdkVersion">+ sdkVersion</option>
+		
+		<option value="//api/name/setTag:">+ setTag:</option>
+		
+		<option value="//api/name/setUserIdentifier:">+ setUserIdentifier:</option>
+		
+		<option value="//api/name/setUserValue:forKey:">+ setUserValue:forKey:</option>
+		
+		<option value="//api/name/startWithAppId:">+ startWithAppId:</option>
+		
+		<option value="//api/name/startWithAppId:config:">+ startWithAppId:config:</option>
+		
+		<option value="//api/name/startWithAppId:developmentDevice:config:">+ startWithAppId:developmentDevice:config:</option>
+		
+		<option value="//api/name/updateAppVersion:">+ updateAppVersion:</option>
+		
+	</optgroup>
+	
+
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">Bugly Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>Bugly.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/startWithAppId:" title="startWithAppId:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startWithAppId:">+&nbsp;startWithAppId:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>初始化Bugly,使用默认<a href="../Classes/BuglyConfig.html">BuglyConfig</a></p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)startWithAppId:(NSString *BLY_NULLABLE)<em>appId</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>appId</code></th>
+						<td><p>注册Bugly分配的应用唯一标识</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>初始化Bugly,使用默认<a href="../Classes/BuglyConfig.html">BuglyConfig</a></p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startWithAppId:config:" title="startWithAppId:config:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startWithAppId:config:">+&nbsp;startWithAppId:config:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>使用指定配置初始化Bugly</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)startWithAppId:(NSString *BLY_NULLABLE)<em>appId</em> config:(BuglyConfig *BLY_NULLABLE)<em>config</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>appId</code></th>
+						<td><p>注册Bugly分配的应用唯一标识</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>config</code></th>
+						<td><p>传入配置的 <a href="../Classes/BuglyConfig.html">BuglyConfig</a></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>使用指定配置初始化Bugly</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/startWithAppId:developmentDevice:config:" title="startWithAppId:developmentDevice:config:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/startWithAppId:developmentDevice:config:">+&nbsp;startWithAppId:developmentDevice:config:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>使用指定配置初始化Bugly</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)startWithAppId:(NSString *BLY_NULLABLE)<em>appId</em> developmentDevice:(BOOL)<em>development</em> config:(BuglyConfig *BLY_NULLABLE)<em>config</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>appId</code></th>
+						<td><p>注册Bugly分配的应用唯一标识</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>development</code></th>
+						<td><p>是否开发设备</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>config</code></th>
+						<td><p>传入配置的 <a href="../Classes/BuglyConfig.html">BuglyConfig</a></p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>使用指定配置初始化Bugly</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setUserIdentifier:" title="setUserIdentifier:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setUserIdentifier:">+&nbsp;setUserIdentifier:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置用户标识</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)setUserIdentifier:(NSString *)<em>userId</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>userId</code></th>
+						<td><p>用户标识</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>设置用户标识</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/updateAppVersion:" title="updateAppVersion:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/updateAppVersion:">+&nbsp;updateAppVersion:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>更新版本信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)updateAppVersion:(NSString *)<em>version</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>version</code></th>
+						<td><p>应用版本信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>更新版本信息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setUserValue:forKey:" title="setUserValue:forKey:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setUserValue:forKey:">+&nbsp;setUserValue:forKey:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置关键数据，随崩溃信息上报</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)setUserValue:(NSString *)<em>value</em> forKey:(NSString *)<em>key</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>value</code></th>
+						<td><p>KEY</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>key</code></th>
+						<td><p>VALUE</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>设置关键数据，随崩溃信息上报</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/allUserValues" title="allUserValues"></a>
+	<h3 class="method-title"><code><a href="#//api/name/allUserValues">+&nbsp;allUserValues</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取关键数据</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSDictionary *BLY_NULLABLE)allUserValues</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>关键数据</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取关键数据</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/setTag:" title="setTag:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/setTag:">+&nbsp;setTag:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设置标签</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)setTag:(NSUInteger)<em>tag</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>tag</code></th>
+						<td><p>标签ID，可在网站生成</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>设置标签</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/currentTag" title="currentTag"></a>
+	<h3 class="method-title"><code><a href="#//api/name/currentTag">+&nbsp;currentTag</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取当前设置标签</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSUInteger)currentTag</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>当前标签ID</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取当前设置标签</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/buglyDeviceId" title="buglyDeviceId"></a>
+	<h3 class="method-title"><code><a href="#//api/name/buglyDeviceId">+&nbsp;buglyDeviceId</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>获取设备ID</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSString *)buglyDeviceId</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>设备ID</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>获取设备ID</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reportException:" title="reportException:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reportException:">+&nbsp;reportException:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>上报自定义Objective-C异常</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)reportException:(NSException *)<em>exception</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>exception</code></th>
+						<td><p>异常信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>上报自定义Objective-C异常</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reportError:" title="reportError:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reportError:">+&nbsp;reportError:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>上报错误</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)reportError:(NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>错误信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>上报错误</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/reportExceptionWithCategory:name:reason:callStack:extraInfo:terminateApp:" title="reportExceptionWithCategory:name:reason:callStack:extraInfo:terminateApp:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/reportExceptionWithCategory:name:reason:callStack:extraInfo:terminateApp:">+&nbsp;reportExceptionWithCategory:name:reason:callStack:extraInfo:terminateApp:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>上报自定义错误</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)reportExceptionWithCategory:(NSUInteger)<em>category</em> name:(NSString *)<em>aName</em> reason:(NSString *)<em>aReason</em> callStack:(NSArray *)<em>aStackArray</em> extraInfo:(NSDictionary *)<em>info</em> terminateApp:(BOOL)<em>terminate</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>category</code></th>
+						<td><p>类型(Cocoa=3,CSharp=4,JS=5,Lua=6)</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aName</code></th>
+						<td><p>名称</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aReason</code></th>
+						<td><p>错误原因</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>aStackArray</code></th>
+						<td><p>堆栈</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>info</code></th>
+						<td><p>附加数据</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>terminate</code></th>
+						<td><p>上报后是否退出应用进程</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/sdkVersion" title="sdkVersion"></a>
+	<h3 class="method-title"><code><a href="#//api/name/sdkVersion">+&nbsp;sdkVersion</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>SDK 版本信息</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (NSString *)sdkVersion</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>SDK版本号</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>SDK 版本信息</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/isAppCrashedOnStartUpExceedTheLimit" title="isAppCrashedOnStartUpExceedTheLimit"></a>
+	<h3 class="method-title"><code><a href="#//api/name/isAppCrashedOnStartUpExceedTheLimit">+&nbsp;isAppCrashedOnStartUpExceedTheLimit</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>App 是否发生了连续闪退
+如果 启动SDK 且 5秒内 闪退，且次数达到 3次 则判定为连续闪退</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (BOOL)isAppCrashedOnStartUpExceedTheLimit</code></div>
+
+		    
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>是否连续闪退</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>App 是否发生了连续闪退
+如果 启动SDK 且 5秒内 闪退，且次数达到 3次 则判定为连续闪退</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">Bugly.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2020 陕西风云在线. All rights reserved. Updated: 2020-03-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

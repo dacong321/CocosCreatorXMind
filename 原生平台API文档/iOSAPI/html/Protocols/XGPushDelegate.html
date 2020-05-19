@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>XGPushDelegate Protocol Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">iOSAPI </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">陕西风云在线</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+
+	
+	<optgroup label="Instance Methods">
+		
+		<option value="//api/name/xgPushDidFinishStart:error:">- xgPushDidFinishStart:error:</option>
+		
+		<option value="//api/name/xgPushDidFinishStop:error:">- xgPushDidFinishStop:error:</option>
+		
+		<option value="//api/name/xgPushDidRegisteredDeviceToken:error:">- xgPushDidRegisteredDeviceToken:error:</option>
+		
+		<option value="//api/name/xgPushDidReportNotification:error:">- xgPushDidReportNotification:error:</option>
+		
+		<option value="//api/name/xgPushDidSetBadge:error:">- xgPushDidSetBadge:error:</option>
+		
+		<option value="//api/name/xgPushUserNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:">- xgPushUserNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:</option>
+		
+		<option value="//api/name/xgPushUserNotificationCenter:willPresentNotification:withCompletionHandler:">- xgPushUserNotificationCenter:willPresentNotification:withCompletionHandler:</option>
+		
+	</optgroup>
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">XGPushDelegate Protocol Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Conforms to</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>XGPush.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/xgPushUserNotificationCenter:willPresentNotification:withCompletionHandler:" title="xgPushUserNotificationCenter:willPresentNotification:withCompletionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/xgPushUserNotificationCenter:willPresentNotification:withCompletionHandler:">&ndash;&nbsp;xgPushUserNotificationCenter:willPresentNotification:withCompletionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>处理iOS 10 UNUserNotification.framework的对应的方法</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)xgPushUserNotificationCenter:(nonnull UNUserNotificationCenter *)<em>center</em> willPresentNotification:(nullable UNNotification *)<em>notification</em> withCompletionHandler:(nonnull void ( ^ ) ( UNNotificationPresentationOptions options ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>center</code></th>
+						<td><p>[UNUserNotificationCenter currentNotificationCenter]</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>notification</code></th>
+						<td><p>通知对象</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>回调对象，必须调用</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/xgPushUserNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:" title="xgPushUserNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/xgPushUserNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:">&ndash;&nbsp;xgPushUserNotificationCenter:didReceiveNotificationResponse:withCompletionHandler:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>处理iOS 10 UNUserNotification.framework的对应的方法</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)xgPushUserNotificationCenter:(nonnull UNUserNotificationCenter *)<em>center</em> didReceiveNotificationResponse:(nullable UNNotificationResponse *)<em>response</em> withCompletionHandler:(nonnull void ( ^ ) ( void ))<em>completionHandler</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>center</code></th>
+						<td><p>[UNUserNotificationCenter currentNotificationCenter]</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>response</code></th>
+						<td><p>用户对通知消息的响应对象</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>completionHandler</code></th>
+						<td><p>回调对象，必须调用</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/xgPushDidFinishStart:error:" title="xgPushDidFinishStart:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/xgPushDidFinishStart:error:">&ndash;&nbsp;xgPushDidFinishStart:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>监控信鸽推送服务地启动情况</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)xgPushDidFinishStart:(BOOL)<em>isSuccess</em> error:(nullable NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>isSuccess</code></th>
+						<td><p>信鸽推送是否启动成功</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>信鸽推送启动错误的信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/xgPushDidFinishStop:error:" title="xgPushDidFinishStop:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/xgPushDidFinishStop:error:">&ndash;&nbsp;xgPushDidFinishStop:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>监控信鸽服务的终止情况</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)xgPushDidFinishStop:(BOOL)<em>isSuccess</em> error:(nullable NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>isSuccess</code></th>
+						<td><p>信鸽推送是否终止</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>信鸽推动终止错误的信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/xgPushDidReportNotification:error:" title="xgPushDidReportNotification:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/xgPushDidReportNotification:error:">&ndash;&nbsp;xgPushDidReportNotification:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>监控信鸽服务上报推送消息的情况</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)xgPushDidReportNotification:(BOOL)<em>isSuccess</em> error:(nullable NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>isSuccess</code></th>
+						<td><p>上报是否成功</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>上报失败的信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/xgPushDidSetBadge:error:" title="xgPushDidSetBadge:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/xgPushDidSetBadge:error:">&ndash;&nbsp;xgPushDidSetBadge:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>监控设置信鸽服务器下发角标的情况</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)xgPushDidSetBadge:(BOOL)<em>isSuccess</em> error:(nullable NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>isSuccess</code></th>
+						<td><p>isSuccess 上报是否成功</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>设置失败的信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/xgPushDidRegisteredDeviceToken:error:" title="xgPushDidRegisteredDeviceToken:error:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/xgPushDidRegisteredDeviceToken:error:">&ndash;&nbsp;xgPushDidRegisteredDeviceToken:error:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>设备token注册信鸽服务的回调</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>- (void)xgPushDidRegisteredDeviceToken:(nullable NSString *)<em>deviceToken</em> error:(nullable NSError *)<em>error</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>deviceToken</code></th>
+						<td><p>当前设备的token</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>error</code></th>
+						<td><p>错误信息</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2020 陕西风云在线. All rights reserved. Updated: 2020-03-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>XGNotificationCategory Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">iOSAPI </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">陕西风云在线</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+	<optgroup label="Properties">
+		
+		<option value="//api/name/actions">actions</option>
+		
+		<option value="//api/name/identifier">identifier</option>
+		
+		<option value="//api/name/intentIdentifiers">intentIdentifiers</option>
+		
+		<option value="//api/name/options">options</option>
+		
+	</optgroup>
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/categoryWithIdentifier:actions:intentIdentifiers:options:">+ categoryWithIdentifier:actions:intentIdentifiers:options:</option>
+		
+	</optgroup>
+	
+
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">XGNotificationCategory Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>XGPush.h</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>通知栏中消息指定的分类，分类主要用来管理一组关联的Action，以实现不同分类对应不同的Actions</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/categoryWithIdentifier:actions:intentIdentifiers:options:" title="categoryWithIdentifier:actions:intentIdentifiers:options:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/categoryWithIdentifier:actions:intentIdentifiers:options:">+&nbsp;categoryWithIdentifier:actions:intentIdentifiers:options:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>创建分类对象，用以管理通知栏的Action对象</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (nullable id)categoryWithIdentifier:(nonnull NSString *)<em>identifier</em> actions:(nullable NSArray&lt;XGNotificationAction*&gt; *)<em>actions</em> intentIdentifiers:(nullable NSArray&lt;NSString*&gt; *)<em>intentIdentifiers</em> options:(XGNotificationCategoryOptions)<em>options</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>identifier</code></th>
+						<td><p>分类对象的标识</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>actions</code></th>
+						<td><p>当前分类拥有的行为对象组</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>intentIdentifiers</code></th>
+						<td><p>用以表明可以通过Siri识别的标识</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>options</code></th>
+						<td><p>分类的特性</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+			<div class="method-subsection return">
+				<h4 class="method-subtitle parameter-title">Return Value</h4>
+				<p>管理点击行为的分类对象</p>
+			</div>
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<div class="note"><p><strong>Note:</strong> 通知栏带有点击事件的特性，只有在iOS8+以上支持，iOS 8 or earlier的版本，此方法返回空</p></div>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/identifier" title="identifier"></a>
+	<h3 class="method-title"><code><a href="#//api/name/identifier">&nbsp;&nbsp;identifier</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>分类对象的标识</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonnull, readonly, copy, nonatomic) NSString *identifier</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/actions" title="actions"></a>
+	<h3 class="method-title"><code><a href="#//api/name/actions">&nbsp;&nbsp;actions</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>分类对象拥有的点击行为组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nonnull, readonly, copy, nonatomic) NSArray&lt;XGNotificationAction*&gt; *actions</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/intentIdentifiers" title="intentIdentifiers"></a>
+	<h3 class="method-title"><code><a href="#//api/name/intentIdentifiers">&nbsp;&nbsp;intentIdentifiers</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>可用以Siri意图的标识组</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (nullable, readonly, copy, nonatomic) NSArray&lt;NSString*&gt; *intentIdentifiers</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/options" title="options"></a>
+	<h3 class="method-title"><code><a href="#//api/name/options">&nbsp;&nbsp;options</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>分类的特性</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>@property (readonly, nonatomic) XGNotificationCategoryOptions options</code></div>
+
+		    
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">XGPush.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2020 陕西风云在线. All rights reserved. Updated: 2020-03-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>

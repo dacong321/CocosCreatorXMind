@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>ObjectCCallOther Class Reference</title>
+
+	<link rel="stylesheet" href="../css/style.css">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1.4">
+	<meta name="generator" content="appledoc 2.2.1 (build 1334)">
+</head>
+<body class="appledoc">
+	<header>
+		<div class="container" class="hide-in-xcode">
+			
+			<h1 id="library-title">
+				<a href="../index.html">iOSAPI </a>
+			</h1>
+
+			<p id="developer-home">
+				<a href="../index.html">陕西风云在线</a>
+			</p>
+			
+		</div>
+	</header>
+
+	<aside>
+		<div class="container">
+			<nav>
+				<ul id="header-buttons" role="toolbar">
+					<li><a href="../index.html">Index</a></li>
+<li><a href="../hierarchy.html">Hierarchy</a></li>
+
+					<li id="on-this-page" role="navigation">
+						<label>
+							On This Page
+
+							<div class="chevron">
+								<div class="chevy chevron-left"></div>
+								<div class="chevy chevron-right"></div>
+							</div>
+
+							<select id="jump-to">
+	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
+	
+
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+
+	
+	
+
+	
+	<optgroup label="Class Methods">
+		
+		<option value="//api/name/noticeInstallNeededApp:">+ noticeInstallNeededApp:</option>
+		
+		<option value="//api/name/onAuthEnd:authCode:">+ onAuthEnd:authCode:</option>
+		
+		<option value="//api/name/onGetLocationComplete:">+ onGetLocationComplete:</option>
+		
+		<option value="//api/name/onGetWebStartAppMsg:">+ onGetWebStartAppMsg:</option>
+		
+		<option value="//api/name/onSelectPhotoGameBgEnd:">+ onSelectPhotoGameBgEnd:</option>
+		
+		<option value="//api/name/onSelectPhotoWallEnd:">+ onSelectPhotoWallEnd:</option>
+		
+		<option value="//api/name/onShareEnd:shareType:">+ onShareEnd:shareType:</option>
+		
+		<option value="//api/name/safeCallOther:">+ safeCallOther:</option>
+		
+	</optgroup>
+	
+
+	
+	
+</select>
+						</label>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</aside>
+
+	<article>
+		<div id="overview_contents" class="container">
+			<div id="content">
+				<main role="main">
+					<h1 class="title">ObjectCCallOther Class Reference</h1>
+
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<th>Inherits from</th>
+	<td>NSObject</td>
+</tr><tr>
+	<th>Declared in</th>
+	<td>ObjectCCallOther.h<br />ObjectCCallOther.mm</td>
+</tr>
+						</tbody></table></div>
+					
+
+                    
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>这个类作用是ObjectC代码调用JS代码.</p>
+					</div>
+					
+					
+
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						
+
+						
+						
+
+						<div class="task-list">
+							<div class="section-method">
+	<a name="//api/name/safeCallOther:" title="safeCallOther:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/safeCallOther:">+&nbsp;safeCallOther:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>OC代码调用JS代码（线程安全）;</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)safeCallOther:(NSString *)<em>script</em>, <em>...</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>jsStr</code></th>
+						<td><p>js接口以及参数
+@Warning 此接口是异步调用可能会延迟.参数必须以nil结尾</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ObjectCCallOther.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/onSelectPhotoWallEnd:" title="onSelectPhotoWallEnd:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/onSelectPhotoWallEnd:">+&nbsp;onSelectPhotoWallEnd:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>选择并处理照片墙结束通知</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)onSelectPhotoWallEnd:(NSString *)<em>filePath</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>filePath</code></th>
+						<td><p>处理完的文件路径</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ObjectCCallOther.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/onSelectPhotoGameBgEnd:" title="onSelectPhotoGameBgEnd:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/onSelectPhotoGameBgEnd:">+&nbsp;onSelectPhotoGameBgEnd:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>选择并处理背景图片结束通知</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)onSelectPhotoGameBgEnd:(NSString *)<em>filePath</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>filePath</code></th>
+						<td><p>处理完的文件路径</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ObjectCCallOther.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/noticeInstallNeededApp:" title="noticeInstallNeededApp:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/noticeInstallNeededApp:">+&nbsp;noticeInstallNeededApp:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>@通知需要安装必须的APP</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)noticeInstallNeededApp:(NSNumber *)<em>type</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>type</code></th>
+						<td><p>1-微信，2-闲聊，3-多聊.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection discussion-section">
+				<h4 class="method-subtitle">Discussion</h4>
+				<p>@通知需要安装必须的APP</p>
+			</div>
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ObjectCCallOther.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/onShareEnd:shareType:" title="onShareEnd:shareType:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/onShareEnd:shareType:">+&nbsp;onShareEnd:shareType:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>分享成功通知.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)onShareEnd:(NSNumber *)<em>sdkType</em> shareType:(NSNumber *)<em>shareType</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sdkType</code></th>
+						<td><p>sdk类型，1-微信，2-闲聊，3-多聊.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>shareType</code></th>
+						<td><p>分享类型 1-图片，2-链接，3-文本.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ObjectCCallOther.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/onAuthEnd:authCode:" title="onAuthEnd:authCode:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/onAuthEnd:authCode:">+&nbsp;onAuthEnd:authCode:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>三方授权登录结果通知.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)onAuthEnd:(NSNumber *)<em>sdkType</em> authCode:(NSString *)<em>authCode</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>sdkType</code></th>
+						<td><p>sdk类型，1-微信，2-闲聊，3-多聊.</p></td>
+					</tr>
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>authCode</code></th>
+						<td><p>&ldquo;SendAuthFailed&rdquo; - 授权失败， 其他字符串为获取到的授权码.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ObjectCCallOther.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/onGetLocationComplete:" title="onGetLocationComplete:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/onGetLocationComplete:">+&nbsp;onGetLocationComplete:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>定位结果通知.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)onGetLocationComplete:(NSString *)<em>result</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>result</code></th>
+						<td><p>定位信息.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ObjectCCallOther.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div><div class="section-method">
+	<a name="//api/name/onGetWebStartAppMsg:" title="onGetWebStartAppMsg:"></a>
+	<h3 class="method-title"><code><a href="#//api/name/onGetWebStartAppMsg:">+&nbsp;onGetWebStartAppMsg:</a></code>
+</h3>
+
+	<div class="method-info">
+		<div class="pointy-thing"></div>
+
+		<div class="method-info-container">
+			
+			
+			<div class="method-subsection brief-description">
+				<p>三方APP起调本App或者给本app传参.</p>
+			</div>
+			
+		    
+
+			<div class="method-subsection method-declaration"><code>+ (void)onGetWebStartAppMsg:(NSString *)<em>str</em></code></div>
+
+		    
+			
+			<div class="method-subsection arguments-section parameters">
+				<h4 class="method-subtitle parameter-title">Parameters</h4>
+				<table class="argument-def parameter-def">
+				
+					<tr>
+						<th scope="row" class="argument-name"><code>str</code></th>
+						<td><p>起调内容.</p></td>
+					</tr>
+				
+				</table>
+			</div>
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+
+			
+			<div class="method-subsection declared-in-section">
+				<h4 class="method-subtitle">Declared In</h4>
+				<p><code class="declared-in-ref">ObjectCCallOther.h</code></p>
+			</div>
+			
+			
+		</div>
+	</div>
+</div>
+						</div>
+						
+					</div>
+					
+					
+
+                    
+                    
+          
+				</main>
+
+				<footer>
+					<div class="footer-copyright">
+						
+						<p class="copyright">Copyright &copy; 2020 陕西风云在线. All rights reserved. Updated: 2020-03-23</p>
+						
+						
+						<p class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2.1 (build 1334)</a>.</p>
+						
+					</div>
+				</footer>
+			</div>
+		</div>
+	</article>
+
+	<script src="../js/script.js"></script>
+</body>
+</html>
