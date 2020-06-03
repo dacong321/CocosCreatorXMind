@@ -18,3 +18,28 @@ socket.io £º ·â×°ÁËWebSocketÒÔ¼°ÆäËûµÄÒ»Ð©Ð­Òé£¬²¢ÇÒÊµÏÖÁËWebSocketµÄ·þÎñ¶Ë´úÂë¡
 
 https://www.jianshu.com/p/00e4decb7ac2
 https://www.cnblogs.com/ostrich-sunshine/p/7474471.html
+-----------------------------------------------------------------
+NodeJSÖÐ
+1. __dirname2 £º Node.js ÖÐ£¬__dirname ×ÜÊÇÖ¸Ïò±»Ö´ÐÐ js ÎÄ¼þµÄ¾ø¶ÔÂ·¾¶£¬ËùÒÔµ±ÄãÔÚ /d1/d2/myscript.js ÎÄ¼þÖÐÐ´ÁË __dirname£¬ ËüµÄÖµ¾ÍÊÇ /d1/d2 ¡£
+2. ./ »á·µ»ØÄãÖ´ÐÐ node ÃüÁîµÄÂ·¾¶£¬ÀýÈçÄãµÄ¹¤×÷Â·¾¶¡£
+3. ÓÐÒ»¸öÌØÊâÇé¿öÊÇÔÚ require() ÖÐÊ¹ÓÃ ./ Ê±£¬ÕâÊ±µÄÂ·¾¶¾Í»áÊÇº¬ÓÐ require() µÄ½Å±¾ÎÄ¼þµÄÏà¶ÔÂ·¾¶¡£
+
+-----------------------------------------------------------------
+svnÊ¹ÓÃ£º
+ÐÂ½¨Ò»¸ösvnµØÖ·£º
+1. ÔÚÄ¿±ê¹¤³ÌÖÐ ,  .svn Ä¿Â¼ÏÂ£¬Êó±êÓÒ¼ü£¬Ñ¡ÔñRepo-browser¡££¨ºÍÄ¿±ê¹¤³ÌÎÞ¹Ø£¬ÆäÊµ¾ÍÊÇÎªÁË´ò¿ª svn ä¯ÀÀÆ÷£©
+2. ÔÚµ¯³ö¿òÄÚ µ¥»÷Ñ¡ÔñÏàÓ¦ÎÄ¼þ¼Ð£¬ ÐÂ½¨ add file £¬ »áÔÚURlÀ¸³öÏÖsvnµØÖ·
+3. ÔÚ±¾µØÏà¶ÔºÏÊÊµÄÎ»ÖÃ check out ³öÀ´£¬½ø¶øÔÚÎÄ¼þÄÚ½øÐÐÌí¼ÓÉ¾³ýÎÄ¼þ¡££¨.svn Í¬Ä¿Â¼ÏÂ£©
+
+
+
+ÔÚÖ÷¹¤³ÌÖÐÌí¼Ó¾ßÌåÓÎÏ·ÈíÁ´½Ó£º
+ÔÚÖ÷¹¤³ÌÒýÓÃµÄÎ»ÖÃ Ìí¼Ó£¬Tortoise SVN -->  peoperties  -->  Ìí¼Ó¹¤³ÌµÄÈíÁ´½Ó£¨svn:externals£©
+ÔÚ1´¦£¨¼´svnä¯ÀÀÆ÷ÖÐ£©£¬»áÏÔÊ¾³ö ¶ÔÓ¦Î»ÖÃµÄÈíÁ´½Ó£¬±êÊ¶´ó¸ÅÎªÀ¶É«¨J¼ýÍ·ÏÔÊ¾¡£
+-----------------------------------------------------------------
+
+
+
+
+
+
