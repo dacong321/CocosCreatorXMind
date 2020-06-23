@@ -1,3 +1,26 @@
+1. http协议依赖可靠传输，在互联网环境中首选使用是TCP传输协议
+2. http协议是基于request/response范式的，服务端不主动向客户端发数据
+3. http 1.0不支持持久连接，每次request/response都要建立一次TCP连接
+4. http 1.1要求支持持久连接，连接可以复用完成多次request/response,但还不能离开request/response范式，还得依靠轮询。
+5. http 1.1开始支持协议切换
+
+websocket出现了。
+原理就是利用http协议进行协议切换，将TCP连接（大家说它socket）从http协议中解放出来，进行更有效的应用数据通讯。
+
+http 与 webSocket 和  socket.io
+http ：      client ==> server  靠客户端发起请求，然后服务端收到请求在进行回应。
+webSocket ： server  <==> client 双向。基于TCP的一种新的网络协议。
+socket.io ： 封装了WebSocket以及其他的一些协议，并且实现了WebSocket的服务端代码。
+
+https://www.jianshu.com/p/00e4decb7ac2
+https://www.cnblogs.com/ostrich-sunshine/p/7474471.html
+
+-----------------------------------
+cocoscreator 使用的标准网络接口
+XMLHttpRequest : 用于短连接
+WebSocket: 用于长连接
+
+cocoscreator 未提供SocketIO
 =====================================================================================================
 通过域名查找ip地址就是dns解析
 网络7层协议，每一层都有每一层的协议
@@ -11,13 +34,7 @@ http协议要基于传输层的tcp/ip协议来实现
 表示层：加密解密编码格式转换
 应用层：http协议，构建在TCP协议之上，为应用软件提供了各种服务，屏蔽了网络传输的相关细节-具体网络传输细节也不需要知道。
 -----------------------------------------------------------------
-http 与 webSocket 和  socket.io
-http ：      client ==> server  靠客户端发起请求，然后服务端收到请求在进行回应。
-webSocket ： server  <==> client 双向。基于TCP的一种新的网络协议。
-socket.io ： 封装了WebSocket以及其他的一些协议，并且实现了WebSocket的服务端代码。
 
-https://www.jianshu.com/p/00e4decb7ac2
-https://www.cnblogs.com/ostrich-sunshine/p/7474471.html
 -----------------------------------------------------------------
 NodeJS中
 1. __dirname2 ： Node.js 中，__dirname 总是指向被执行 js 文件的绝对路径，所以当你在 /d1/d2/myscript.js 文件中写了 __dirname， 它的值就是 /d1/d2 。
@@ -36,6 +53,8 @@ svn使用：
 在主工程中添加具体游戏软链接：
 在主工程引用的位置 添加，Tortoise SVN -->  peoperties  -->  添加工程的软链接（svn:externals）
 在1处（即svn浏览器中），会显示出 对应位置的软链接，标识大概为蓝色↗箭头显示。
+
+添加具体软链接 相当于 引用刚才创建的svn地址的东西
 -----------------------------------------------------------------
 ----------------------------------------------------------
 简单介绍工作流：
@@ -193,6 +212,18 @@ creator提供了自动图集功能，将碎图打成Atlas
   每个模块就是一个单独的作用域
   以同步的require 方法来引用其它模块
   设置module.exports 为导出的 变量
+
+小例子：
+---------------------------
+在非cc.class组件内
+let AA= require("脚本名")
+导出对象
+module.exports = {};
+---------------------------
+在cc.class组件内
+extends AA;
+---------------------------
+
 ======================================================
 require:
 可在脚本任意地方任意时刻调用
@@ -254,8 +285,97 @@ CCClass： 使用cc.Class声明的类
 如果子包被加载成功，则子包中的脚本会自动运行，之后就像使用主包一样的使用子包了。
 ======================================================
 八. 对象池cc.NodePoor
+运行时 创建销毁节点比较耗时，
+我们一般在onLoad的时候进行节点的创建，切换场景的时候进行节点的销毁。
+如果在游戏过程中，建议使用对象池，
+即在onLoad中创建对象池 this poor = new cc.NodePoor(); 
+创建池对象后,对象池插入对象 poor .put.(cc.instantiate(this.prefab));
+在对象池中取出对象 let prefab = poor.get();
+将用过的节点放回返回值也是 对象池.put（放回的节点） 
+
+
+this.poor = new cc.NodePoor("脚本组件参数");
+this.poor.get(); 得到对象池中对象的时候 会调用 脚本组件的reuse方法 
+当this.poor.put(Item); 会调用脚本组件的unuse方法
+就是对象池、脚本组件、和对象池对象的联系。
+======================================================
 九. 动作系统：是基于Node的
 
+缓动系统 => 动作系统
+
+// 基础动作  --> 1.时间间隔动作  2.即时动作
+// 容器动作
+// 动作回调
+
+// 不同类型之间的动作复合
+// 动作回调，和动作回调的三个参数 ，动作回调不能停止自身动作
+// 缓动动作easing 函数
+======================================================
+十.替代动作的 cc.tween 新的API系统
+
+// 链式API
+cc.tween(this.node).to(1,{position:cc:v2(100,100), rotation:360}).
+to(1,{scale:2}).
+start() //将之前生成的action队列重新组合生成一个cc.sequence队列
+所以cc.tween的链式结构是依次执行每一个API
+
+// 设置缓动性
+to ： 绝对
+by ： 相对
+
+
+//  支持缓动任意对象的任意属性
+let obj = {key : 100}
+cc.tween(obj).to(1,{key:100}).start();
+
+// 同时执行多个属性
+cc.tween(this.node).to(1, {scale:2, position:cc.v2(100,100). rotation:90});
+
+//easing 函数
+cc.tween().to(1,{scale:2, position:cc.v2(1,2), rotation:20}, {easing: ""});
+easing 函数：可以是系统自带的
+ 可以是自己定义的
+ easing :   t=> t*t    // 参数 => 函数体 也可以这样写  (t)=>{t*t};
+ 对多个属性使用easing 函数，对单个属性使用easing函数
+
+//自定义progress(用法类类似于easing)
+cc.tween().to(1, {position: cc.v2(10, 2), rotation:45}, {progress : (t1, t2, t3)=>{ return t1 + t2 + t3;}})
+
+// 一个cc.tween()就是一个队列，如果要同时执行多个队列则使用
+.parallel(cc.tween.to(1, position: cc.v2(100,100)), cc.tween.by(2, rotation: 52));
+
+
+// 回调
+.call( ()=>{} )
+
+// 重复执行
+repeat / repeatForever函数会将前一个action作为作用对象
+
+// 延迟执行
+.delay(),
+======================================================
+十一.定时器
+// Js 的setTimeout 和setInterval
+
+
+component.schedule()
+四个参数： 回调， 时间间隔，重复几次， 延迟多久
+
+component.unschedule();
+取消定时器，参数是哪个回调函数。
+
+
+当然也可以再回调函数中取消定时器， 参数就是这个回调函数本身
+======================================================
+十二.脚本的执行顺序
+
+同节点挂载脚本的执行顺序 ABABAB
+设置组件执行优先级
+properties: {
+}
+edit: {
+ execution: -1,  //越小越早
+},
 ======================================================
 android：
 
@@ -308,23 +428,442 @@ R.java文件自动生成，用来定义Android程序中所有各类型的资源的的索引。
 有控件的id的索引，string字符串资源的索引，layout的索引，drawable资源索引等等
 用户可以通过“R.资源类名.索引”来调用定义的资源
 
+=====================================================================================================
+2020/06/23
+
+1. JS绑定 jsb
+2. android和ios端写原生平台代码，与creator中打包构建项目
+3. 怎么接第三方sdk
+4. 现存项目，如热更新等。马甲包
+-----------------------------------------------------------------------------
+抽象层
+JS绑定的大部分工作其实就是 ，设定JS相关操作的CPP回调，在回调函数中关联cpp对象。
+1.注册JS函数，绑定一个CPP回调。
+2.注册JS对象的属性读写访问器，分别绑定读与写的cpp回调。
+因为script引擎较多，所有我们把它统一了。
+使用宏 来抹平不同JS引擎回调函数定义与参数类型的不同。
+-----------------------------------------------------------------------------
+cocoscreator中 继承自cc.Component的组件所在的脚本一般都会作为组件附加到节点上（被继承的基类可以不用附加到节点上，基类被子类继承，子类就具有了父类的属性）。 在creator中的JavaScript脚本则需要用的时候require此脚本进行使用就可以了。
+-----------------------------------------------------------------------------
+cc.js.getClassByName(脚本名);//通过名称获取注册类
+目前测试的是CocosCreator一旦运行，在assert目录下的继承自extends: cc.Component所有脚本都可以在cc.js的属性里看到
+（_registeredClassIds: 和 _registeredClassNames:  属性）。
+通过cc.js.getClassByName(脚本名);可以知晓该参数脚本是否被注册。
+如果被注册了，说明脚本存在，即脚本可以被挂载在节点上进行使用。
+在使用脚本组件时，可以在被挂载节点上getComponent取得该组件进行使用。
+
+在assert目录下的JavaScript脚本，未继承自extends: cc.Component，这个脚本在cc.js的属性里是看不到的。可以使用require(脚本名);获取脚本，如果脚本存在，则可以获取改脚本对象。直接使用require 返回的js脚本对象。
+-----------------------------------------------------------------------------
+一般浏览器采用CMD规范。CMD规范是非同步加载模块.
+CMD规范推崇依赖就近 as lazy as possible
+全局函数define(参数);
+1.参数是对象或者字符串的时候表示，模块的接口就是该对象或者字符串。
+2.当参数是函数的时候，表示是模块的构造方法。
+执行该构造方法可以得到模块对外的接口。函数在执行的时候默认会传入三个参数：require，exports，module。
+例如：
+define(function(require, exports, module){
+	//-- require函数接收模块标识做参数，用来接收其它模块的接口。require一直就是这么写。
+	var a = require("./a");
+	a.doSomething();
+});
+-----------------------------------------------------------------------------
+ADM规范是非同步加载模块，允许指定回调函数。
+一般浏览器采用AMD规范。
+对于依赖的模块，AMD是提前执行。不过RequireJS从2.0开始，也改成可以延迟执行（根据写法不同，处理方式不同）
+AMD推崇依赖前置
+define(['./a','./b'], function(a, b){
+	//依赖必须一开始就写好
+	a.doSomething();
+	...
+	b.doSomething();
+	...
+});
+-----------------------------------------------------------------------------
+一般Nodejs采用CommonJS规范
+CommonJS规范加载模块是同步的，只有加载完成，才能执行后面的操作。
+每个文件就是一个模块，有自己的作用域。
+js文件被加载后，每个模块都有一个moudle对象和一个exports对象。
+moudle对象有一个exports属性，属性表示当前模块对外输出的接口，其他文件加载该模块，实际上就是读取moudle.exports变量。
+为了方便，Node为每个模块提供一个exports变量指向moulde.exports
+require函数用于加载模块文件。
+注意：不能直接将exports变量指向一个值，因为这样等于切断了exports与moudle.exports的联系。
+所以如果一个模块的对外接口，就是一个单一的值，不能使用exports输出，只能使用module.exports.
+
+例子：
+// -- a.js
+// ---------------------- node -------------------------
+module.exports = {
+	a:function(){},
+	b:'xxx',
+};
+// ---------------------- ADM or CMD--------------------
+define(function(require, exports, module){
+	module.exports = {
+		a : function(){},
+		b : 'xxx'
+	};
+});
+
+// -- b.js
+// ---------------------- node -------------------------
+var m = require('./a');
+m.a();
+// ---------------------- ADM or CMD -------------------
+define(function(require, exports, module){
+	var m = require('./a');
+	m.a();
+});
 
 
+-----------------------------------------------------------------------------
+cocosCreator:
+再给属性赋值的时候，属性的notify函数一定会被触发，即使新值与旧值是一样的也会触发。
+-----------------------------------------------------------------------------
+require/exports 
+require/exports 出生在野生规范当中，即这些规范是 JavaScript 社区中的开发者自己草拟的规则，得到大家的承认或者广泛的应用。比如 CommonJS、AMD、CMD 等等。
+
+CommonJS 是 Node.js 的规范。require/exports 的用法只有以下三种简单的写法：
+const fs = require('fs')
+exports.fs = fs
+module.exports = fs
 
 
+module.export
+-----------------------------------------------------------------------------
+ES6中export和import的使用。
+import/export 则是名门正派。TC39 制定的新的 ECMAScript 版本，即 ES6（ES2015）中包含进来。
+
+// profile.js
+var firstName = 'Michael';
+var lastName = 'Jackson';
+var year = 1958;
+export {firstName, lastName, year};
 
 
+// main.js
+import {firstName, lastName, year} from './profile';
+
+function setName(element) {
+  element.textContent = firstName + ' ' + lastName;
+}
+-----------------------------------------------------------------------------
+CommonJS 和 ES6 之间的差异，Node.js 无法直接兼容 ES6。所以现阶段 require/exports 仍然是必要且是必须的。出自 ES6 的 import/export 相对就晚了许多。
+这也就是为什么前面说 require/exports 是必要且必须的。因为事实是，目前你编写的 import/export 最终都是编译为 require/exports 来执行的。
+-----------------------------------------------------------------------------
+jdk java 虚拟机，编译.class的环境
+--> sdk (java) 使用java开发android
+--> NDK(c/c) 要使用c/c的第三方库，以前是用java 的jni调用c/c。（Java调用C方法）
+NDK的使用（java调用C方法）
+https://blog.csdn.net/zhufeng1222/article/details/76047128
+-----------------------------------------------------------------------------
+数据属性 访问器属性
+原型属性  实例属性
+Object.cerate() 必须接收一个对象参数，创建的新对象的原型指向接收的参数对象，
+new Object() 创建的新对象的原型指向的是 Object.prototype. 
+（表述有点啰嗦，简洁点说就是前者继承指定对象， 后者继承内置对象Object）
+
+可以通过Object.create(null) 创建一个干净的对象，也就是没有原型，
+而 new Object() 创建的对象是 Object的实例，原型永远指向Object.prototype
+-----------------------------------------------------------------------------
+Object.create(proto)方法创建一个新对象，使用现有的对象来提供新创建的对象的 __proto__.
+
+proto 新创建对象的原型对象。
 
 
+每个对象都会在内部初始化一个属性,就是__proto__,当我们访问一个对象时，如果对象内部不存在这个属性，那么他就会去__proto__里去找这个属性，这个__proto__又会有自己的__prto__，于是这样一直找下去，也就是原型链。
+
+每个函数都有一个prototype属性（只有函数才有），这个属性是一个指针，prototype属性指向原型对象。
 
 
+函数的prototype下的属性，在函数实例化对象时可以由对象调用，不可以用函数名调用。但prototype属性可以被所有对象共享。
+如果函数直接添加属性，则可以用  函数名.属性  进行调用添加的属性。因为这是类属性，不是对象属性。
+
+-----------------------------------------------------------------------------
+逗号分隔， 不是逗号操作符
+var a=0, b=5, c="ss";
+//-- 下面的函数返回的是i，即返回的是1。
+    testDouhaoUsed(){
+
+        var args = 1,s2 ="sss";
+        cc.log(args);
+        cc.log(s2);
+        function ttes(){
+            var i = 0;
+            return (i+=1, i);
+        }
+        cc.log(ttes());
+    },
+-----------------------------------------------------------------------------
+[].slice.call(arguments, 1) //--意思是取得arguments数组的下标为1的元素
+//arguments是调用对象，替换了[],1是传递给slice的参数。
+-----------------------------------------------------------------------------
+//-- 把一些脚本设置为插件， 允许编辑器加载，如编辑器中的其它普通脚本加载过程中会依赖当前脚本，则需要手动开启这个选项。
+通常我们在插件中写入： 
+1.立即执行函数，立即执行函数内部没有加入  window.  的属性，外部是不可访问的，加入即可在外部访问（全局）。如果在函数的外部写入的 属性，则不需要加入  window. 属性。 如果在函数内部，没有定义而立即使用的属性，则也会直接认为是全局变量（在不是strict的情况，在strict的情况直接使用未定义的属性会报错）
+2.可以给一些既定存在的类型添加原型属性，例如在cocoscreator中。
+cc.Toggle.prototype.setSelectState = function(isSelect) {
+    cc.log("isSelect==", isSelect);
+    cc.log("this.toggleGroup==", this.toggleGroup);
+    cc.log("this._toggleContainer==", this._toggleContainer);
+    var group = this.toggleGroup || this._toggleContainer;
+}
 
 
+插件脚本需要手动声明 use strict,否则未定义的变量一旦赋值就会变成全局变量
+-----------------------------------------------------------------------------
+自己的问题：new 出来的ccToggle 和 属性检查器中出来的属性不同。
+答：自己new出来的cc.Toggle 是一个组件对象。
+    属性检查器中的是Node节点上附加了cc.Toggle属性，而且这个Node是由父子节点的。
+    这两个是不一样的东西，即属性不同。
+-----------------------------------------------------------------------------
+//-- 关于require的循环引用问题：
+//-- item.js
+var item = cc.Class({
+   properties:()=>({
+	game:{		
+		default:null,	
+		type:require("other"),
+	     }
+   })
+});
+module.exports = item;
+
+//-- other.js
+var other = cc.Class({
+	properties:()=>({
+		item:{
+			default:null,
+			type:require("item"),
+		}
+	})
+});
+module.exports = other;
+即由此可知，在这里require出来的是一个类型。
+-----------------------------------------------------------------------------
+--> 载入场景 -->自动运行所包含组件的游戏脚本。请深刻理解“包含组件的游戏脚本”
+-----------------------------------------------------------------------------
+声音加载过程中
+插件脚本加载过程中（是否编辑器中的其它普通脚本加载过程中会依赖当前脚本）
+-----------------------------------------------------------------------------
+get/set 属性
+{  item:  
+      {
+         get:function(){
+            return this._width;
+         },
+         set:function(width){
+            this._width = width;
+         }
+      }
+ }
+-----------------------------------------------------------------------------
+属性加载
+一般我们这么写
+properties:{
+
+}
+lambada 属性加载
+properties: ()=>({key:{}})
+properties: ()=>{ return {};}
+properties: function(){
+	       return {};
+            }
+-----------------------------------------------------------------------------
+//-- 子类调用基类函数
+var rect = cc.Class(){
+   extends: Shape,
+   getName : function(){
+      Shape.prototype.getName.call(this);
+      return baseName + "(rect)";
+   }
+   //-- 也可以这样调用父类
+   getName : function(){
+      this._super();
+   }
+   	
+}
+-----------------------------------------------------------------------------
+C++ 关于宏的一点总结
+编译器处理宏是在预处理阶段，是按照文本的顺序进行处理的。遇到宏时就定义一个宏变量。
+宏相当一个全局变量，但是在不同cpp中定义是不能相互使用的，除非在.h文件中。
+
+-----------------------------------------------------------------------------
+js的方法：
+对象方法：
+类方法：
+原型方法：
+function baseClass(){
+  this.show = function(){console.log(" baseClass : show")};
+};
+
+function extendClass(){
+  this.show = function(){console.log(" extendClass: show")}
+};
+extendClass.prototype = new baseClass();
+
+let extObj = new extendClass();
+//对象方法
+extObj.show() //输出 extendClass : show
+//类方法不是对象方法 
+var baseinstance = new baseClass();
+baseinstance.show.call(extendClass); //输出 baseClass : show
+
+baseinstance.show.call(extObj); //输出 baseClass : show  
+extObj.show.call(baseinstance); //输出  extendClass: show 
+
+xxx.show.call(yyy); //xxx必须是实例，yyy可以是实例也可以是类型
+-----------------------------------------------------------------------------
+内置数据类型：string
+引用数据类型：Object array date function regExp
+
+array：
+array.every  所有为true
+
+some  一些为true
+
+filter//过滤得到符合要求的arra
+
+map  //映射得到符合要求的arr
 
 
+array.forEach(index, index , arrays){
+
+}
+
+push /  shift
+pop  /  unshift
+-----------------------------------------------------------------------------
+原型类型属性：
+ 你不需要显示的声明一个prototype属性，因为在每一个构造函数中都有他的存在。
+ prototype是一个原型类型对象。
+ 当一个对象呗创建时，这个构造函数 将会把它的属性prototype赋给新对象的内部属性
+ __prototype__.
+ 这个__prototype__被这个对象用来查找它的属性。
+-----------------------------------------------------------------------------
+数据属性 
+configureable enumeable value writeable
+访问器属性
+configurwable enumeable set get 通过一个属性的值改变其他属性
+-----------------------------------------------------------------------------
+实例属性 原型属性
+调用构造好函数后生成的每个对象实例都包含 一个原型属性对象。 每个对象实例的原型属性对象都是同一份。
+当给与对象实例 覆盖与 原型属性相同的名字的属性，则调用时使用的是 对象实例覆盖的属性。
+判断使用的这个属性是否是实例对象自己的，则可以用 实例对象.hasOwnProperty("属性名")；
+枚举其中的 for in 除了不可枚举的部分都会枚举出来
+object.getprototypenames();
+-----------------------------------------------------------------------------
+例子：证明实例属性和原型属性
+function Fish(name, color){
+   this.name=name;
+   this.color=color;
+}
+Fish.prototype.livesIn="water";
+Fish.prototype.price=20;
+
+var fish1=new Fish("mackarel", "gray");
+var fish2=new Fish("goldfish", "orange");
+var fish3=new Fish("salmon", "white");
+for (int i=1; i<=3; i++){
+   alert(fish.name+","+fish.color+","+fish.livesIn+","+fish.price);
+}
+输出应该是：
+
+"mackarel, gray, water, 20"
+"goldfish, orange, water, 20"
+"salmon, white water, 20"
+-----------------------------------------------------------------------------------
+Node 类型
+属性：  组。坐标。旋转角度。相对父节点缩放。xyz轴缩放。xy轴倾斜角度。 透明度
+  节点颜色。xy轴锚点位置。节点宽度 高度。zIndex层级排序。
+  节点的不同明度是否影响子节点。children节点的所有子节点。
+  childrenCount
+  active
+  子节点是否在场景中激活
+  parent 
+方法：
+  on ：this.node.on(cc.Node.EventType.TOUCH_START, this.memberFunction, this); 
+在节点上注册指定的回调函数。可以设置target用于绑定响应函数的this对象
+
+  once : 注册节点的特定事件类型回调。回调会在第一时间被触发后删除自身。
+  off： 删除之前同类型 回调 目标 或useCapture
+  
+  emit 通过事件名发送自定义事件
+
+-----------------------------------------------------------------------------
+我们游戏中使用的fire是 根据数组存储事件对象元素， 在遍历这个数组时候如果存在事件
+则使用cb.apply(obj, argument); obj进行即时执行 cb函数。
+使用apply 
+
+另一种用法： Math.max.apply(null, aray); //null 代表没有对象去执行这个方法，我只需要
+用这个方法进行运算，得到返回的结果就行。 
+（充分利用apply 的特性 自动把第二个数组参数变成一个一个元素 成为函数的参数 ）
+
+array.prototype.push.apply(array, needPushArr);
+
+-----------------------------------------------------------------------------
+全局执行上下文 window对象。 他是var 声明的全局变量的载体。
+函数执行上下文可以存在无数个，当每一个函数被调用时都会创建一个函数上下文。
+执行上下文栈 也叫调用栈，执行栈用于存储代码执行期间创建的所有上下文。
+-----------------------------------------------------------------------------
+利用JSON转换值达到存储的的方式非常好用
+利用json.stringify将存储对象转换成字符串，使用localStorage进行存储，.
+当使用localStorge将存储的东西拿出来的后，也是个字符串。 
+将字符串在使用JSON.parse()从一个字符串中解析出JSON对象 就可以进行使用了
 
 
+//--JSON.stringify()函数是用来序列化对象的，
+无论输入什么，输出的都是字符串类型，可以按自己的需求来定制如何序列化，
+输出结果是怎样的格式.
+（这个函数可以配置不同的参数：一个参数 object{}/ array []； 
+  二个参数 第二个参数为函数/数组；
+  三个参数 ）
 
+bool number string 序列化过程中会转为原始值/  undefine null symbol 在序列化过程中会被忽略
+（在非数组对象的属性值中时）或者被转换成null（出现在数组中时） 不可枚举的属性会被忽略。
+
+JSON.parse()从一个字符串中解析出JSON对象
+
+-----------------------------------------------------------------------------
+浅拷贝与深度拷贝:深拷贝，是拷贝对象各个层级的属性(concat方法与slice也存在这样的情况，他们都不是真正的深拷贝)
+（对象的拷贝）
+function deepClone(obj){
+    let objClone = Array.isArray(obj)?[]:{};
+    if(obj && typeof obj==="object"){
+        for(key in obj){
+            if(obj.hasOwnProperty(key)){
+                //判断ojb子元素是否为对象，如果是，递归复制
+                if(obj[key]&&typeof obj[key] ==="object"){
+                    objClone[key] = deepClone(obj[key]);
+                }else{
+                    //如果不是，简单复制
+                    objClone[key] = obj[key];
+                }
+            }
+        }
+    }
+    return objClone;
+}    
+let a=[1,2,3,4],
+    b=deepClone(a);
+a[0]=2;
+console.log(a,b);
+
+
+除了递归，我们还可以借用JSON对象的parse和stringify
+function deepClone(obj){
+    let _obj = JSON.stringify(obj),   
+        objClone = JSON.parse(_obj);
+    return objClone
+}    
+let a=[0,1,[2,3],4],
+    b=deepClone(a);
+a[0]=1;
+a[2][0]=1;
+console.log(a,b);
+-----------------------------------------------------------------------------
+js数组和对象的区别：
+有序、无序。 对象是关联数组，就是将值与特定的对象关联在一起。
+当用点号运算符来存取对象属性时，属性名是用标识符表示的；当用中括号来存取对象属性时，属性名是用字符串表示的，因此可以在运行过程中动态生成字符串。
 
 
 
