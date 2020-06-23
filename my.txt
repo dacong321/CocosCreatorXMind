@@ -864,6 +864,563 @@ console.log(a,b);
 js数组和对象的区别：
 有序、无序。 对象是关联数组，就是将值与特定的对象关联在一起。
 当用点号运算符来存取对象属性时，属性名是用标识符表示的；当用中括号来存取对象属性时，属性名是用字符串表示的，因此可以在运行过程中动态生成字符串。
+-----------------------------------------------------------------------------
+cocoscreator构建发布， 模板选项生成jsb-default，工程文件在frameworks中。
+
+============android studio和eclipse====================
+因为AS是基于IDEA的，与Eclipse还是有所不同。
+Android Studio 项目目录结构
+.gradle 文件夹包含的是 gradle 工具的各个版本。
+
+
+android studio里面的iml是什么文件，android工程的配置文件，这是一个临时文件，编译后出现的。
+（IML是由IntelliJ IDEA创建的模块文件，用于开发Java应用程序的IDE。它存储有关开发模块的信息，该模块可能是Java，Plugin，Android或Maven组件; 保存模块路径，依赖关系和其他设置。）
+
+android studio中的build.gradle
+
+-----------------------------
+英汉互译
+//-- Task 任务
+//-- plugin插件
+//-- Gradle 小秘书
+
+
+一、什么是Gradle
+Gradle是一个构建工具，它是用来帮助我们构建app的，构建包括编译、打包等过程。我们可以为Gradle指定构建规则，然后它就会根据我们的“命令”自动为我们构建app。Android Studio中默认就使用Gradle来完成应用的构建。
+
+有些时候，我们会有一些个性化的构建需求，比如我们引入了第三方库，或者我们想要在通用构建过程中做一些其他的事情，这时我们就要自己在系统默认构建规则上做一些修改。这时候我们就要自己向Gradle”下命令“了，这时候我们就需要用Gradle能听懂的话了，也就是Groovy。Groovy是一种基于JVM的动态语言
+
+
+我们在开头处提到“Gradle是一种构建工具”。实际上，当我们想要更灵活的构建过程时，Gradle就成为了一个编程框架——我们可以通过编程让构建过程按我们的意愿进行。
+当我们把Gradle作为构建工具使用时，我们只需要掌握它的配置脚本的基本写法就OK了；而当我们需要对构建流程进行高度定制时，就务必要掌握Groovy等相关知识了。
+
+
+
+二、Gradle的基本组分
+1. Project与Task
+在Gradle中，每一个待构建的工程是一个Project，构建一个Project需要执行一系列Task，比如编译、打包这些构建过程的子过程都对应着一个Task。具体来说，一个apk文件的构建包含以下Task：Java源码编译、资源文件编译、Lint检查、打包以生成最终的apk文件等等。
+2. 插件
+插件的核心工作有两个：一是定义Task；二是执行Task。也就是说，我们想让Gradle能正常工作，完成整个构建流程中的一系列Task的执行，必须导入合适的插件，这些插件中定义了构建Project中的一系列Task，并且负责执行相应的Task。
+
+在新建工程的app模块的build.gradle文件的第一行，往往都是如下这句：
+apply plugin: 'com.android.application'
+这句话的意思就是应用“com.android.application“这个插件来构建app模块，app模块就是Gradle中的一个Project。也就是说，这个插件负责定义并执行Java源码编译、资源文件编译、打包等一系列Task。实际上"com.android.application"整个插件中定义了如下4个顶级任务：
+assemble: 构建项目的输出（apk）
+check: 进行校验工作
+build: 执行assemble任务与check任务
+clean: 清除项目的输出
+当我们执行一个任务时，会自动执行它所依赖的任务。比如，执行assemble任务会执行assembleDebug任务和assembleRelease任务，这是因为一个Android项目至少要有debug和release这两个版本的输出。
+3. Gradle配置文件
++png
+
+上面我们说过，Android Studio中的一个Module即为Gradle中的一个Project。上图的app目录下，存在一个build.gradle文件，代表了app Module的构建脚本，它定义了应用于本模块的构建规则。我们可以看到，工程根目录下也存在一个build.gradle文件，它代表了整个工程的构建，其中定义了适用于这个工程中所有模块的构建规则。
+
+接下来我们介绍一下上图中其他几个Gradle配置文件：
+
+gradle.properties: 从它的名字可以看出，这个文件中定义了一系列“属性”。实际上，这个文件中定义了一系列供build.gradle使用的常量，比如keystore的存储路径、keyalias等等。
+
+gradlew与gradlew.bat: gradlew为Linux下的shell脚本，gradlew.bat是Windows下的批处理文件。gradlew是gradle wrapper的缩写，也就是说它对gradle的命令进行了包装，比如我们进入到指定Module目录并执行“gradlew.bat assemble”即可完成对当前Module的构建（Windows系统下）。
+
+local.properties: 从名字就可以看出来，这个文件中定义了一些本地属性，比如SDK的路径。
+
+settings.gradle: 假如我们的项目包含了不只一个Module时，我们想要一次性构建所有Module以完成整个项目的构建，这时我们需要用到这个文件。比如我们的项目包含了ModuleA和ModuleB这两个模块，则这个文件中会包含这样的语句：include ':ModuleA', ':ModuleB'。
+
+
+
+
+4. 构建脚本
+首先我们来看一下工程目录下的build.gradle，它指定了真个整个项目的构建规则，它的内容如下：
+buildscript {
+    repositories {
+        jcenter() //构建脚本中所依赖的库都在jcenter仓库下载
+    }
+    dependencies {
+        //指定了gradle插件的版本
+        classpath 'com.android.tools.build:gradle:1.5.0'
+    }
+}
+
+allprojects {
+    repositories {
+        //当前项目所有模块所依赖的库都在jcenter仓库下载
+        jcenter()
+    }
+}
+
+
+我们再来简单介绍下app模块的build.gradle的内容：
+
+//加载用于构建Android项目的插件
+apply plugin: 'com.android.application'
+
+android { //构建Android项目使用的配置
+    compileSdkVersion 23 //指定编译项目时使用的SDK版本
+    buildToolsVersion "23.0.1" //指定构建工具的版本
+
+    defaultConfig {
+        applicationId "com.absfree.debugframwork" //包名
+        minSdkVersion 15  //指定支持的最小SDK版本
+        targetSdkVersion 23 //针对的目标SDK版本
+        versionCode 1 
+        versionName "1.0"
+    }
+    buildTypes { //针对不同的构建版本进行一些设置
+        release { //对release版本进行的设置
+            minifyEnabled false //是否开启混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'  //指定混淆文件的位置
+        }
+    }
+}
+
+dependencies { //指定当前模块的依赖
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+}
+
+
+
+三、常见配置
+整个工程的build.gradle通常不需我们改动，这里我们介绍下一些对模块目录下build.gradle文件的常见配置。
+1. 依赖第三方库
+当我们的项目中用到了了一些第三方库时，我们就需要进行一些配置，以保证能正确导入相关依赖。设置方法很简单，比如我们在app模块中中用到了Fresco，只需要在build.gradle文件中的dependencies块添加如下语句：
+dependencies {
+    ...
+    compile 'com.facebook.fresco:fresco:0.11.0'
+}
+这样一来，Gradle会自动从jcenter仓库下载我们所需的第三方库并导入到项目中。
+2. 导入本地jar包
+在使用第三方库时，除了像上面那样从jcenter仓库下载，我们还可以导入本地的jar包。配置方法也很简单，只需要先把jar文件添加到app\libs目录下，然后在相应jar文件上单击右键，选择“Ad As Library”。然后在build.gradle的dependencies块下添加如下语句：
+compile files('libs/xxx.jar')
+实际上我们可以看到，系统为我们创建的build.gradle中就已经包含了如下语句：
+compile fileTree(dir: 'libs', include: ['*.jar'])
+这句话的意思是，将libs目录下的所有jar包都导入。所以实际上我们只需要把jar包添加到libs目录下并“Ad As Library"即可。
+3. 依赖其它模块
+假设我们的项目包含了多个模块，并且app模块依赖other模块，那么我们只需app\build.gradle的denpendencies块下添加如下语句：
+compile project(':other')
+4. 构建输出为aar文件
+通常我们构建的输出目标都是apk文件，但如果我们的当前项目时Android Library，我们的目标输出就是aar文件。要想达到这个目的也很容易，只需要把build.gradle的第一句改为如下：
+apply plugin:'com.android.library'
+这话表示我们使用的插件不再是构建Android应用的插件，而是构建Android Library的插件，这个插件定义并执行用于构建Android Library的一系列Task。
+5. 自动移除不再使用的资源
+只需进行如下配置：
+android {
+    ...
+    }
+    buildTypes {
+        release {
+            ...
+            shrinkResources true
+            ...
+        }
+    }
+}
+6. 忽略Lint错误
+在我们构建Android项目的过程中，有时候会由于Lint错误而终止。当这些错误来自第三方库中时，我们往往想要忽略这些错误从而继续构建进程。这时候，我们可以只需进行如下配置：
+android {
+    ...
+    lintOptions {
+        abortOnError false
+    }
+}
+7. 集成签名配置
+在构建release版本的Android项目时，每次都手动导入签名文件，键入密码、keyalias等信息十分麻烦。通过将签名配置集成到构建脚本中，我们就不必每次构建发行版本时都手动设置了。具体配置如下：
+signingConfigs {
+    myConfig { //将"xx"替换为自己的签名文件信息
+        storeFile file("xx.jks")
+        storePassword "xx"
+        keyAlias "xx"
+        keyPassword "xx"
+    }
+}
+android {
+    buildTypes {
+        release {
+            signingConfig  signingConfigs.myConfig //在release块中加入这行
+            ...
+        }
+    }
+    ...
+}
+
+真实开发中，我们不应该把密码等信息直接写到build.gradle中，更好的做法是放在gradle.properties中设置：
+RELEASE_STOREFILE=xxx.jks 
+RELEASE_STORE_PASSWORD = xxx
+RELEASE_KEY_ALIAS=xxx
+RELEASE_KEY_PASSWORD=xxx
+然后在build.gradle中直接引用即可：
+signingConfigs {
+    myConfig { 
+        storeFilefile(RELEASE_STOREFILE)
+        storePassword RELEASE_STORE_PASSWORD
+        keyAlias RELEASE_KEY_ALIAS
+        keyPassword RELEASE_KEY_PASSWORD 
+    }
+}
+
+
+四、延伸阅读
+
+1. 深入理解Android之Gradle:http://blog.csdn.net/Innost/article/details/48228651
+
+   邓凡平老师的一篇博文，从原理到使用非常深入细致地介绍了Gradle。而且重点介绍了怎样把Gradle当做一个编程框架来使用，介绍了Groovy语法基础、Gradle常用API，想要高度定制项目构建过程的小伙伴们一定不要错过这篇文章哦：）
+
+ 
+
+2. Gradle构建最佳实践: http://www.figotan.org/2016/04/01/gradle-on-android-best-practise/
+
+这篇文章主要从使用者的角度介绍了Gradle在使用过程中的最佳实践，同样非常精彩。
+
+ 
+
+转自http://mp.weixin.qq.com/s?__biz=MzIzMjE1Njg4Mw==&mid=2650117738&idx=1&sn=cfaf39a23d9ebe655f687e4abb90312c#rd
+
+
+
+
+============================================================================
+AndroidStudio、gradle、buildToolsVersion概述
+每次gradle 或者studio 有推荐更新后,项目重新sync后都会报错，提示更新相应的其他版本，比如AndroidStudio、gradle、buildToolsVersion版本；
+
+概念：
+Android SDK Build-Tools： 是编译 Android 应用所需 Android SDK 的一个组件，安装在 <sdk>/build-tools/ 目录中。（而buildToolsVersion是android构建工具的版本，其中包括了打包工具aapt、dx等等。这个工具的目录位于..your_sdk_path/build-tools/XX.XX.XX，通过SDK Manager 更新；）您应始终让 Build Tools 组件保持最新状态。为此，您可以使用 Android SDK 管理器下载该组件的最新版本。如果您使用的是 Android Plugin for Gradle 3.0.0 或更高版本，那么您的项目会自动使用该插件指定的默认版本的 Build Tools。要使用其他版本的 Build Tools，请在模块的 build.gradle 中使用 buildToolsVersion 进行指定，如下所示：
+
+ android {
+        buildToolsVersion "29.0.0"
+        ...
+    }
+
+
+Gradle：是一个工具，同时它也是一个编程框架。使用这个工具可以完成app的编译打包等工作；
+compileSdkVersion：编译版本，就是运行我们这个项目的需要的android SDK版本；
+
+
+comileSdkVersion 和buildToolsVersion区别
+新建一个项目，看build.gradle文件的配置，如下：
+
+
+CompileSdkVersion:是告诉gradle 用哪个SDK版本来编译，和运行时要求的版本号没有关系；使用任何新添加的 API 就需要使用对应 Level 的 Android SDK。
+buildToolsVersion: android构建工具的版本,在SDK Manager中安装选择版本，buildToolsVersion的版本需要>=CompileSdkVersion; 高版本的build-tools 可以构建低版本编译的android程序；
+
+
+gradle版本和com.android.tools.build:gradle配置的版本关系
+之前会奇怪，为什么一更新gradle 插件版本，会报错
+如下图，红色部分配置的就是android gradle 插件的版本，gradle插件的版本号和gradle版本号是对应的，较新的插件版本需要要求较新版的gradle，所以提示你更新gradle；
+
+
+和apk有关的是targetSdk， compileSdk只是开发编译时候用的sdk版本，在咱们写代码时候编译报黄或者包红都是跟compilesdk进行的比较，不过为了确保输出版本apk的api和编译时候相同，我们一般都会讲compileSdk和targetSdk设置一样。
+
+=========================
+1.Gradle
+Gradle是一个基于Apache Ant和Apache Maven概念的项目自动化构建开源工具。它使用一种基于Groovy的特定领域语言(DSL)来声明项目设置，抛弃了基于XML的各种繁琐配置。
+2.Gradle插件
+其实应该是AndroidStudio Gradle Plugin，也就是AndroidStudio用于开发Android项目的gradle插件。
+所以说，Gradle插件和Gradle不是一个东西。
+Gradle和Android Gradle Plugin的关系？
+①Gradle插件会有版本号，每个版本号又对应有一个或一些 Gradle发行版本（一般是限定一个最低版本），也就是我们常见的类似gradle-4.1-all.zip这种东西；如果这两个版本对应不上了，那你的工程构建的时候就会报错。对应关系参看Gradle插件和Gradle版本对应关系。
+②Android Studio 3.0 之后自动将插件版本升级到3.0.0，所以我们也需要对应地把Gradle升级到4.1才行。（后面就是因为这个填坑）
+Android Gradle Plugin和 Android SDK BuildTool的关系？
+③Android Gradle Plugin又会跟 Android SDK BuildTool有关联（版本有对应的关系），因为它还承接着AndroidStudio里的编译相关的功能，这也是我们要在项目的 local.properties 文件里写明Android SDK路径、在build.gradle 里注明 buildToolsVersion 的原因。Android Gradle Plugin 本质上就是 一个AS的插件，它一边调用 Gradle本身的代码和批处理工具来构建项目，一边调用Android SDK的编译、打包功能，从而让我们能够顺畅地在AS上进行开发。
+
+
+------------------------------------------------------------------
+https://my.oschina.net/huangyong/blog/361751
+------------------------------------------------------------------
+default package是缺省包的意思!也就是没有名字的包.其它的包如果要调用缺省包中的类,必须插入包名.但是缺省包却无名,所以不能够直接调用!
+解决办法:
+你右击default package,然后再建立一个新包(例如是:mypackage),把你先前建立的.java文件直接拖到新包(mypackage)中,缺省包会自动消失的!
+
+//-- 一二三步骤可以用来建立一个Jar包，然后其他工程可以引用。
+一、创建一个工程，创建一个接口。（编写的服务接口）
+二、 将此工程的接口，制作成一个Jar包
+既然叫JAR包，一定记着建工程的时候记得建包！不能是default package
+1.写好以后右键,然后选择导出
+2.选择以JAR文件导出
+3.选择导出路径
+三、编写服务接口实现类
+4.导出成功,然后导入 Build Path->Add External Aarchives 
+5.右击工程->属性->选择Libraries,选择 Add External JARs
+6.选择之前保存的JAR文件
+7.并在Order and Export中，在你要导入的包的前面打钩
+8.导入成功，利用import关键字导包即可使用
+什么是jar包，做什么用的？
+@是什么？严格说@符号并未在java 语言中作为操作符使用。而是在其他附属技术中使用
+
+如果导入了jar包，在人为的把jar包路径变更，则会出错。
+------------------------------------------------------------------
+Java的框架还算比较多的，像spring框架算是很成熟的框架了
+
+Java的配置文件.properties文件和xml文件。
+一、properties文件
+.properties配置文件是什么？
+答：Properties文件是java中很常用的一种配置文件，文件后缀为“.properties”，属文本文件，文件的内容格式是“键=值”的格式，可以用“#”作为注释，java编程中用到的地方很多，运用配置文件，可以便于java深层次的解耦。
+例如java应用通过JDBC连接数据库时，可以把数据库的配置写在配置文件 jdbc.properties：
+driver=com.mysql.jdbc.Driver 
+jdbcUrl=jdbc:mysql://localhost:3306/user 
+user=root 
+password=123456
+
+二、Properties类
+java中提供了配置文件的操作类Properties类（java.util.Properties）：
+
+读取properties文件的通用方法：根据键得到value
+/**
+     * 读取config.properties文件中的内容，放到Properties类中
+     * @param filePath 文件路径
+     * @param key 配置文件中的key
+     * @return 返回key对应的value
+     */
+    public static String readConfigFiles(String filePath,String key) {
+        Properties prop = new Properties();
+        try{
+            InputStream inputStream = new FileInputStream(filePath);
+            prop.load(inputStream);
+            inputStream.close();
+            return prop.getProperty(key);
+        }catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("未找到相关配置文件");
+            return null;
+        }
+    }
+
+把配置文件以键值对的形式存放到Map中：
+/**
+     * 把.properties文件中的键值对存放在Map中
+     * @param inputStream 配置文件（inputstream形式传入）
+     * @return 返回Map
+     */
+    public Map<String, String> convertPropertityFileToMap(InputStream inputStream) {
+        try {
+            Properties prop = new Properties();
+            Map<String, String> map = new HashMap<String, String>();
+            if (inputStream != null) {
+                prop.load(inputStream);
+                Enumeration keyNames = prop.propertyNames();
+                while (keyNames.hasMoreElements()) {
+                    String key = (String) keyNames.nextElement();
+                    String value = prop.getProperty(key);
+                    map.put(key, value);
+                }
+                return map;
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+------------------------------------------------------------------
+
+------------------------------------------------------------------
+在XML配置文件中使用properties文件的键值作为变量化参数
+
+------------------------------------------------------------------
+
+https://www.jb51.net/article/158921.htm
+@Java注解又叫java标注（Annotation）
+
+
+注解，就是元数据，即描述数据的数据。注解就是源代码的元数据。
+@Override
+public String toString() {
+ return "This is String Representation of current object.";
+}
+
+上面的代码中，我重写了toString()方法并使用了@Override注解。但是，即使我不使用@Override注解标记代码，程序也能够正常执行。那么，该注解表示什么？这么写有什么好处吗？事实上，@Override告诉编译器这个方法是一个重写方法(描述方法的元数据)，如果父类中不存在该方法，编译器便会报错，提示该方法没有重写父类中的方法
+
+
+------------------------------------------------------------------
+这部分内容很重要，Annotations仅仅是元数据，和业务逻辑无关。
+如果Annotations不包含业务逻辑，那么必须有人来实现这些逻辑。
+元数据的用户来做这个事情。
+Annotations仅仅提供它定义的属性(类/方法/包/域)的信息。
+Annotations的用户(同样是一些代码)来读取这些信息并实现必要的逻辑。
+当我们使用Java的标注Annotations(例如@Override)时，JVM就是一个用户，它在字节码层面工作。到这里，应用开发人员还不能控制也不能使用自定义的注解。因此，我们讲解一下如何编写自定义的Annotations。
+
+我们来逐个讲述编写自定义Annotations的要点。上面的例子中，你看到一些注解应用在注解上。
+
+
+
+---------------------------------------------------------------------------------------------
+开发类库 运行环境 部署环境
+JavaEE JavaME
+Java的垃圾自动收集（无c c++的垃圾自动收集功能， 运算符重载，多重继承等）
+Java语言以面向对象为基础，不能再类外定义单独的数据和函数，所有的对象都要派生于同一个基类，并共享其所有功能。所以说，Java语言最外部的数据类型是对象，所有元素都要通过类和对象来访问。
+分布式：
+由于Java中内置了TCP/IP, HTTP, FTP等协议，因此在Java应用程序可以通过URL地址访问网络上的对象。
+
+多线程、高效、可移植性。
+
+
+JDK是Java的开发工具包，也是Java开发者必须安装的软件环境。
+JDK包含了JRE与开发Java程序所需的工具，如编译器、调试器、反编译器、文档生成器
+
+
+JRE是Java程序运行的必要环境，包含类库和JVM,如果只运行Java程序，就没必要安装JDK,只安装JRE即可。
+
+Java是跨平台开发语言，根据平台的不同，要选择不同的JDK
+
+安装Eclipse前需要先安装JDK
+
+
+Java中最基本的类java.long.Object是Java中所有类的祖先。
+java.lang包它包含着Java最基础和核心的类，在编译时会自动导入。Object类没有定义属性，一共有13个方法。
+Java 中，用native关键字修饰的函数，表明该方法的具体实现在dll文件中，对于不同平台，其具体实现应该有所不同。
+
+整个类的定义包括其所有成员都是在一对大括号中完成的，这标志着类定义块的开始和结束。
+main() 方法，程序从这里开始执行，所有的Java应用程序都必须有一个main()方法。main()方法是所有Java应用程序的起始点。
+
+void static main(String[] args){}
+static 表示无需创建类的实例，可以直接调用main方法。
+
+
+java程序的运行原理：Javac 编译器变异HelloWord.java文件，生成HelloWord.class文件。
+                    Java  解释器解释 .class 文件。
+
+Java程序的基本组成
+Java数据类型
+Java语言的运算符和表达式
+Java语言的流程控制语句
+组的定义和使用方法
+方法和方法的重载
+
+在Java中声明一个类的方式主要有两种，即class类名称和public class 类名称。
+类是Java的基本存储单元，Java中所有的操作都是由类组成的。
+一般习惯把main方法放在public class声明的类中，
+public static void main(String[] args) 是程序的主方法，
+即所有的程序都以此方法为起点并运行下去。
+！！！ public class类名称的“类名称”必须与文件名相同。
+在一个Java文件中可以有多个class类的定义，但只能有一个public class的定义
+
+Java的标识符和关键字
+常量和变量
+作用域嵌套
+
+Java数据类型：
+（原始类型“简单类型：整数、字符、浮点、布尔”
+和引用类型“复合类型”： 类、接口、数组 ）
+
+基本数据类型默认值
+类型转换： 自动转化和强制转换
+类型提升：提升的规则就是将表达式的运算结果的类型提升为
+所有操作数数据类型中范围最大的数据类型。
+
+
+操作数、运算符、表达式
+
+类声明的基本格式：
+访问说明符 class 类名 extends 超类名 implements 接口名
+如果访问说明符为public ， 则类名必须和文件名保持一致。
+
+类体：
+成员变量： 访问说明符 数据类型 变量名
+方法：  访问说明符 数据类型 方法名
+
+类的单继承性： 允许用extends关键字从一个类扩展出一个新类，新类继承超
+类的成员变量和方法，并可覆盖该方法。
+
+类中有两个特殊变量super和this
+super: 类声明中用关键字extends扩展了其超类之后，super用在扩展类
+中引用其超类中的成员变量。
+this
+
+构造函数
+Package为关键字，包名为标识符。
+1.Package语句要作为程序非注释语句的第一行语句
+2.包内的类名唯一
+3.引用包中的类时，使用import语句。import语句的基本格式为import 包名.类名
+
+
+接口：
+Java禁止多继承属性，但可以通过接口来帮助类扩展方法.接口中可以定义大量的常量和方法,
+但其中的方法只是一种声明,没有具体的实现,使用接口的类自己实现这些方法.
+接口与类不同在于:
+1.没有变量的声明,但可以定义常量.
+2.只有方法的声明,没有方法的实现.
+
+接口声明的基本格式:
+public interface 接口名 extends 接口列表
+
+-----------------------------------------------------------------------------------
+Java源程序中可以有多个定义的类，但必须有一个主类，这个主类是Java程序运行的入口点。
+主类为包含main方法的类：
+在Java源程序中，主类的名字同文件名一致。
+标识符，关键字，转义符
+运算符和表达式
+
+2的a次方
+ 8 >> a
+
+运算符
+流程控制： 顺序 循环 选择
+数组声明实际是创建一个引用，通过代表引用的这个名字来引用数组。
+
+由于数组是对象，所以可以使用关键字new来创建一个数组。
+
+new int[10]; //int[10]是一个类型。
+数组创建时，每个元素都按它所存放数据类型的缺省值被初始化。
+-----------------------------------------------------------------------------------
+类
+类声明：
+例如： public class HelloApplet extends Applet
+访问说明符 public
+类名 HelloApplet
+扩展类为 JDK 自带的java.applet.Applet类
+由于public的存在，所以文件名必须为HelloApplet.java 同类名保持一致。
+类体：
+类体包括成员变量和方法
+创建类的实例：
+类的单继承性：extends关键字从有一个类扩展出一个新类，新类继承超类的成员变量和方法，并可以覆盖方法。
+特殊变量： super和this
+构造函数：类中的构造函数用来初始化一个类，构造函数为public类型，
+          用来从类实例中访问类时初始化此类的是一样变量； new object(参数1， 参数2, ...);
+
+包：包在物理上 就是一个文件夹，逻辑上代表一个分类的概念。
+包就是指一组类。例如一个包名 叫Company的包，可以包含一组类，如Employee/Manager/Department等。
+import 包名.类名
+
+-----------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+根据官方文档
+如何在android平台 使用javaScript调用 Java方法？
+答：使用反射机制。
+使用cocoscreator中的 jsb.reflection 调用Java中的静态方法。
+//参数即， 类名 方法名 方法签名
+即： jsb.reflection.callStaticMethod(className, methodName, methodSignature, ...);
+
+
+javaScript 下调用Java代码，使得Java执行原生平台的功能：
+gg.log("现在我开始通过JavaScript调用 java的接口了", jsb);
+jsb.reflection.callStaticMethod("org/cocos2dx/javascript/Test", "hello", "(Ljava/lang/String;)V", "this is msg from js");;
+// 调用第一个sum方法
+var result = jsb.reflection.callStaticMethod("org/cocos2dx/javascript/Test", "sum", "(II)I", 3, 7);
+cc.log(result); //10
+
+
+java下的类和类内的静态函数:
+在org/cocos2dx/javascript路径下建立 org/cocos2dx/javascript/Test文件
+建立Test类，类内定义三个static 函数。
+---------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
