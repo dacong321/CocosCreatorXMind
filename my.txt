@@ -1404,8 +1404,45 @@ java下的类和类内的静态函数:
 在org/cocos2dx/javascript路径下建立 org/cocos2dx/javascript/Test文件
 建立Test类，类内定义三个static 函数。
 ---------------------------------------------------------------------------------------------
+一.CocosCreator的扩展编辑器
+   以包（package）的形式进行加载，扩展编辑器的功能。
+
+①创建并安装扩展包：就是在项目路径下创建一个packages文件夹包含两个文件main.js和package.josn
+package.json （包描述文件）来告诉编译器这个包来扩展什么。
+包描述文件指定的main : main.js 是包的入口程序。入口程序会在CocosCreator的主进程中被加载，加载成功后，会调用入口程序的load函数。
+并且会将定义在 messages 字段中的函数注册成 IPC 消息。
+
+②全局扩展包/项目扩展包：它们存放的路径不一样。
 
 
+③每个新开启的窗口就是 一个独立的渲染进程，每个进程独享自己的javaScript内容，彼此之间无法直接访问，如需访问则要进行IPC通讯。
+CocosCreator的扩展包也分为主进程和渲染进程两部分：主进程的脚本程序main.js，用户界面是另一个渲染进程。
+
+④扩展包工作流程模式： 
+入口程序完成全部工作。（main.js的load生命周期里 /  或者使用菜单项触发）
+入口程序和编辑面板配合：就是主进程和渲染进程之间的通讯，Editor.Ipc.sendToPanel，Editor.Ipc.sendToMain
+
+⑤插件只提供组件和资源：指的是扩展包可以作为组件和相关资源（如预制体、贴图、资源）的载体。
+
+⑥扩展主菜单： package.json --> main-menu字段添加 菜单路径 和菜单选项
+菜单专用菜单分类：插件专用的菜单分类路径是 i18n:MAIN_MENU.package.title, 在中文语言环境会显示为一级子菜单 “插件”，
+接下来的二级菜单路径名应该是插件的包名，最后的三级路径是具体菜单项功能。
+如：i18n:MAIN_MENU.package.title/FooBar/Bar
+
+
+⑦扩展编辑器面板: package.json --> panel字段 添加面板的入口程序
+如：
+{
+  "name": "simple-package",
+  "panel": {
+    "main": "panel/index.js",
+     ...
+}
+定义入口程序：通过Editor.Panel.extend({...})函数来注册面板。参数是一个对象来描述这个面板。
+// panel/index.js
+Editor.Panel.extend({
+});
+通过在主进程中（入口程序）调用Editor.Panel.open('simple-package') 
 
 
 
