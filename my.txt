@@ -1587,15 +1587,129 @@ a 链接标签的属性，name
 创建电子邮件链接
 -----------------------------------------------------------------------------------
 图像元素：
+<img> 空标签，意思是说只包含属性，且没有闭合标签。
 图像标签img和它的源属性Src和它的alt属性联用
 <p>
 <img src = "图片路径" alt = "图片无法显示">
 </p>
 -----------------------------------------------------------------------------------
+2020/07/17
+//加载"assets/resources"下的本地文件
+ cc.loader.loadResDir
+//加载"assets" 下的本地文件
+ cc.loader.loadRes
 
 
+-----------------------------------------------------------------------------------
+//-- 在类中 _currentState 的值变化，notify会被执行。
+cc.Class({
+    extends: BaseComponent,
+    properties: {
+        nodeLogin           : cc.Node,          //--登录相关节点
+        toggleYinsi         : cc.Toggle,        //-- 隐私选择
 
+        nodeUpdate          : cc.Node,          //-- 热更新节点
+        progressBar         : cc.ProgressBar,   //-- 热更新进度条
+        labelInfo           : cc.Label,         //-- 热更新信息
+        labelProgress       : cc.Label,         //-- 更新进度
 
+        nodeBtnWX           : cc.Node,
+        nodeBtnYK           : cc.Node,
+        nodeBtnZH           : cc.Node,
+
+        manifestUrl : {
+            default : null,
+            type : cc.Asset
+        },
+        _currentState : {
+            default : StateEnum.waitting,
+            type : StateEnum,
+            notify() {
+                gg.log("状态改变------", this._currentState);
+                switch (this._currentState) {
+-----------------------------------------------------------------------------------
+测试分包加载
+   onBtn1(){
+        this.label.string = "加载BundleAsset";
+        this.functionloadScenceBundle();
+    },
+    onBtn2(){
+        console.log("game1场景中onBtn2按钮被点击begin--");
+
+        let bundle = cc.assetManager.getBundle('game1');
+        if (bundle == null || typeof bundle == "undefined") {
+            this.label.string = "没有正确获取bundle，点击btn1加载AssetBundle";
+        } else {
+            //-- 成功加载bundle后记载bundle中的场景，并运行改场景
+            bundle.loadScene('g1', function (err, scene) {
+                cc.director.runScene(scene);
+            });
+        }
+        console.log("game1场景中onBtn2按钮被点击over--");
+    },
+
+    //-- 加载Asset Bundle
+    functionloadScenceBundle() {
+        //-- 加载 Asset Bundle
+        let result = cc.assetManager.loadBundle('game1', (err, bundle) => {
+            if (err) {
+                gg.log("加载Asset Bundle失败");
+                return false;
+            }
+            this.sceneBundle = bundle;
+            return true;
+            //-- 如下利用bundle上的 load 方法来加载 Asset Bundle 中的各类资源
+
+            // // 加载 Prefab
+            // bundle.load(`prefab`, cc.Prefab, function (err, prefab) {
+            //     let newNode = cc.instantiate(prefab);
+            //     cc.director.getScene().addChild(newNode);
+            // });
+
+            // // 加载 Texture
+            // bundle.load(`image`, cc.Texture2D, function (err, texture) {
+            //     console.log(texture)
+            // });
+            ////批量加载资源
+            // //加载场景
+            // bundle.loadScene('game', function (err, scene) {
+            //     //-- 运行场景
+            //     //cc.director.runScene(scene);
+            //     if (isError) {
+            //         return;
+            //     }
+            //     gg.gggInit(qipaiType, isReconnect, isGold);
+            //     self.addGameSceneJs(scene, isVideo, videoData);
+            //     ggBase.init(function (baseError) {
+            //         if (baseError) {
+            //             return;
+            //         }
+            //         self.pretreatmentGameSceneJs(function () {
+            //             // gg.globalNode.changeOrientationH(true);
+            //             gg.globalNode.adaptive(true);
+            //             self.changeScene("game", cb);
+            //             gg.uiManager.clearView();
+            //             if (gg.global.isDebug || gg.global.isStand) {
+            //                 gg.debug.openGame(gg.global.curQipaiId);
+            //             }
+            //         });
+            //     }, isGold);
+            // });
+        });
+        return result;
+    },
+    // //-- 得到当前的sence bundle
+    // getCurrentSceneBundleAsset(sceneName, cb) {
+    //     //加载场景
+    //     this.sceneBundle.loadScene(sceneName, function (err, scene) {
+    //         if (err) {
+    //             cb(scene);
+    //             return null;
+    //         }
+    //         cb(scene);
+    //         return scene;
+    //     });
+    // }
 
 
 
