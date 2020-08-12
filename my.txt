@@ -2086,10 +2086,93 @@ input±êÇ©£¬ input±êÇ©ÓÐÒ»¸ötypeÊôÐÔ£¬Õâ¸öÊôÐÔÓÐºÜ¶àÀàÐÍµÄÈ¡Öµ£¬È¡ÖµµÄ²»Í¬¾Í¾ö¶¨Á
 input±êÇ©ÓÐÒ»¸övalueÊôÐÔ
 ¸øÊäÈë¿òÉèÖÃÄ¬ÈÏÖµ: value = "112233";
 
+input±êÇ©ÓÐÒ»¸ötypeÊôÐÔ£¬Õâ¸öÊôÐÔÓÐÒ»¸ö button ÀàÐÍµÄÈ¡Öµ
+°´Å¥£ºtype= "button";  ËüµÄ×÷ÓÃÊÇ¿ÉÒÔÅäºÏjsÍê³ÉÒ»Ð©²Ù×÷¡£
+°´Å¥: type= "image";   ÕâÊÇÒ»¸öÍ¼Æ¬°´Å¥£¬¿ÉÒÔÅäºÏjsÍê³ÉÒ»Ð©²Ù×÷¡£
+°´Å¥: type= "reset"    Çå¿Õ±íµ¥ÖÐµÄÊý¾Ý¡£ ×¢Òâ£ºÕâ¸ö°´Å¥ÒªÐ´ÔÚ±íµ¥formÖ®ÖÐ¡£
+ÖØÖÃ°´Å¥ÓÐÄ¬ÈÏµÄ°´Å¥±êÌâ£¬Ä¬ÈÏ½Ð×öÖØÖÃ¡£ ¿ÉÒÔÀûÓÃvalueÊôÐÔÀ´ÐÞ¸ÄÄ¬ÈÏ±êÌâ¡£
+°´Å¥: type= "submit"  ¶¨ÒåÌá½»°´Å¥£¬½«±íµ¥ÖÐµÄÊý¾ÝÌá½»µ½Ô¶³Ì·þÎñÆ÷¡£
+×¢Òâµã£º
+1.¸æËß±íµ¥ÐèÒªÌá½»µ½ÄÄ¸ö·þÎñÆ÷
+  ¿ÉÒÔÍ¨¹ýform±êÇ©µÄactionÊôÐÔ¸æËß±íµ¥£¬ÐèÒªÌá½»µ½ÄÄ¸ö·þÎñÆ÷¡£
+2.¸æËß±íµ¥£¬ÄÄÐ©Êý¾ÝÐèÒªÌá½»
+  ¼ÓÉÏnameÊôÐÔ£¬Í¨¹ýnameµÄkeyºÍtextÊäÈëµÄvalue£¬ ÒÔ¼üÖµ¶ÔµÄÐÎÊ½È·ÈÏÌá½»µÄÄÚÈÝ
+  (±íµ¥formÖÐµÄÒ»Ð©Êý¾ÝÒªÌá½»£¬µÃÒªÓÐnameÊôÐÔ)
+  ×¢Òâ£ºÔÚµ¥Ñ¡¿ò»ò¶àÑ¡¿òÖÐ£¬ËûÃÇµÄÄÇÃ´nameÒªÏàÍ¬£¬ÔÚÌá½»Êý¾ÝÇ°ÒªÅäºÏvalueÒ»ÆðÊ¹ÓÃ£¬
+  ÕâÑù²ÅÄÜÈ·¶¨ÓÃ»§µã»÷ÁËÄÄ¸öµ¥Ñ¡/¶àÑ¡¿ò¡£
+  ¼´£ºÔÚ±íµ¥±êÇ©ÖÐ£¬³ýÁË°´Å¥±êÇ©ÒÔÍâµÄ±êÇ©£¬¶¼¿ÉÒÔÍ¨¹ývalueÀ´Ö¸¶¨ÐèÒªÌá½»µ½·þÎñÆ÷µÄÊý¾Ý¡£
+3.×îºóÓÃsubmit°´Å¥½øÐÐÌá½»µ½·þÎñÆ÷
+
+
+input±êÇ©ÓÐÒ»¸ötypeÊôÐÔ£¬Õâ¸öÊôÐÔÓÐÒ»¸ö hidden ÀàÐÍµÄÈ¡Öµ
+Òþ²ØÓò:type = "hidden"
+×÷ÓÃ£ºÓÃÓÚÍµÍµÊÖ»úÓÃ»§µÄÒ»Ð©Êý¾Ý£¬Òþ²ØÓò²»»á³öÏÖÔÚÒ³ÃæÖÐ¡£
+
+
+label±êÇ©£º
+1.Ä¬ÈÏÇé¿öÏÂÎÄ×ÖºÍÊäÈë¿òÊÇÃ»ÓÐ¹ØÁª¹ØÏµµÄ£¬Ò²¾ÍÊÇËµµã»÷ÎÄ×ÖÊäÈë¿ò²»»á¾Û½¹£¬Èç¹ûÏëµã»÷ÎÄ×ÖÊ±ÈÃ¶ÔÓ¦µÄÊäÈë¿ò¾Û½¹£¬ÄÇÃ´¾ÍÐèÒªÈÃÎÄ×ÖºÍÊäÈë¿ò½øÐÐ°ó¶¨¡£
+2.ÒªÏëÈÃÊäÈë¿òºÍÎÄ×Ö°ó¶¨ÔÚÒ»Æð£¬ÄÇÃ´ÎÒÃÇ¿ÉÒÔÊ¹ÓÃLabel±êÇ©¡£
+<label for="account">ÕËºÅ:</label><input="text" id="account">  //labelµÄfor¶ÔÓ¦µÄÊÇinputµÄid
+
+×¢Òâ£ºÎÒÃÇÍ¨³£ÊÇÊ¹ÓÃÉÏÃæÕâÖÖÐ´·¨¡£Ò»°ã²»»áÊ¹ÓÃ<label><input typ ="text"></input></label>
+ËäÈ»ÉÏÊö¿ÉÒÔÊµÏÖ°ó¶¨£¬µ«°ó¶¨µÄÊ±ºò²»ÄÜÍ¨¹ýid°ó¶¨£¬½ø¶ø²»ÄÜ±ä¸ü°ó¶¨µÄ¶ÔÏó£¬ËùÒÔ´Ë·½·¨ÓÐÈ±ÏÝ¡£
+
+
+ÒòÎªºÜ¶àä¯ÀÀÆ÷²»Ö§³Ö£¬ËùÒÔ½öÎªÁË½âµÄ±êÇ©¡£
+datalist±êÇ©£º
+´ýÑ¡Ïî±êÇ©
+<datalist id = "cards">
+   <option>´ýÑ¡ÏîÄÚÈÝ</option>
+</datalist>
+//idÉí·ÝÖ¤£¬ÓÃÓÚÆäËûµÄ±êÇ©ÊôÐÔ°ó¶¨ÊÇÊ¹ÓÃ¡£»òÕßcss°ó¶¨²éÕÒÊ±Ê¹ÓÃ¡£
+±ÈÈç£º<input type="text" list="cards"></input>
+ÒòÎªºÜ¶àä¯ÀÀÆ÷²»Ö§³Ö£¬ËùÒÔ½öÎªÁË½âµÄ±êÇ©ÊôÐÔ¡£
+<input type = "email">
+<input type = "url">
+<input type = "number">
+<input type = "date">   //-- È¡ÈÕÆÚ
+<input type = "color">  //--È¡É«°åÈ¡ÑÕÉ«
 
 
 
+
+±íµ¥ÖÐ¿ÉÓÐ select±êÇ©£º
+×÷ÓÃ£ºÓÃÓÚ¶¨ÒåÏÂÀ­ÁÐ±í
+¸ñÊ½£º
+<select>
+   <option>ÁÐ±íÊý¾Ý</option>
+   <option selected = "selected">Ä¬ÈÏÑ¡ÖÐµÄÁÐ±íÊý¾Ý</option>
+</select>
+
+<select>
+   <optgroup label = "·Ö×éÃû³Æ">  //optgroupÓÃÓÚ·Ö×éµÄ±êÇ©£¬labelÊôÐÔÖ¸¶¨·Ö×éµÄÃû³Æ¡£
+        <option>ÁÐ±íÊý¾Ý</option>
+        <option>ÁÐ±íÊý¾Ý</option>
+   </optgroup>
+</select>
+
+±íµ¥ÖÐ¿ÉÒÔÓÐtextarea±êÇ©£º
+×÷ÓÃ£º¶¨ÒåÒ»¸ö¶àÐÐÊäÈë¿ò
+¸ñÊ½£º
+<textarea cols="2" rows="5"> //Ö¸¶¨2ÁÐ5ÐÐ£¬ËäÈ»Ö¸¶¨ÁËÁÐÊýºÍÐÐÊý¡¢µ«ÊÇ»¹¿ÉÒÔÎÞÏÞÍùÏÂÊäÈë¡£
+   ÊäÈë¿òµÄÄÚÈÝ
+</textarea>
+×¢Òâµã£º
+1.Ä¬ÈÏ¿ò¿ÉÒÔÎÞÏÞµÄ»»ÐÐ
+2.textarea ÊÇÓÐÄ¬ÈÏ¿í¶ÈµÄ
+3. cols rowsÊôÐÔ ¿É¸Ä±ä¿í¸ß
+4. ¿ÉÒÔÀ­Éì¿ò textarea
+css¿ÉÒÔÈÃËü²»À­Éì
+<style type= "text/css">
+   textarea{
+      resize:none;
+   }
+</style>
 -----------------------------------------------------------------------------------
+
+
+
+
 div
 span
 br£º Ð´¶àÉÙ¸öbr±êÇ© ¾Í»»¶àÉÙÐÐ
