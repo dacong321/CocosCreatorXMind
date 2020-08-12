@@ -2169,13 +2169,130 @@ css可以让它不拉伸
    }
 </style>
 -----------------------------------------------------------------------------------
+多媒体标签：
+
+可以在w3school中查找h5新增的标签。
+先前的html只能处理文字数据和图片数据，现在新增的h5可以处理多媒体数据。
+video标签：
+作用：用来播放视频。
+<video src=""></video>
+
+video标签的属性：
+src：video标签需要播放的视频地址
+autoplay:用于告诉video标签是否需要自动播放视频
+controls:  用于告诉video标签是否显示控制条
+poster:用于告诉video标签视频在没有播放之前显示的占位图片
+loop:一般用于做广告视频,循环播放
+preload: 预加载视频，和autoplay属性相冲，如果设置了autoplay属性，那么preload属性就会失效。
+muted:静音
+width: 和img标准一样
+height:
+
+<video src="" controls="controls" autoplay="autoplay"></video>
+
+
+video标签的第二种格式:
+由于视频数据非常非常的重要，所以五大浏览器厂商都不愿意支持别人的格式，所以导致了没有一种视频格式是所有浏览器支持的。
+这时候W3C为了解决这个问题，所以推出了第二个video标签的格式。
+<video>
+   <source src="" type="video/webm"></source>
+   <source src="" type="video/mp4"></source>
+   <source src="" type="video/ogg"></source>
+</video>
+在source中添加各种格式的文件，用来支持多浏览器需要播放的视频。（浏览器会找source 的视频）
+
+注意点： 就是浏览器也要必须支持html5，否则也不能播放。
+
+
+audio标签：
+作用：播放音频
+audio和video标签一样，同样也有两种格式，第二种格式同样是兼容不同的浏览器
+第一种格式
+<audio src=""></audio>
+第二种格式
+<audio>
+   <source src="" type="">
+</audio>
+注意点：audio和video标签的使用基本一样，video能够使用的属性在audio标签中大部分都能使用，
+并且功能都一样。只不过有3个属性不能用，height/width/poster
+
+
+详情和概要标签：
+作用：尽可能少的空间显示尽可能多的数据。
+
+<details>
+   <summary>概要信息</summary>
+    详细信息
+</details>
+默认情况下详细信息是折叠起来的。
+
+
+marquee标签：
+作用：跑马灯的效果
+注意点：
+marquee标签不是W3C推荐的标签，在W3C官方文档中也无法查询这个标签，但是各大浏览器对这个标签的支持非常好。
+<marquee direction="right"></marquee>
+direction属性用来标识跑马灯滚动的方向。 left/right/down/up
+<marquee scrollamount= "100"></marquee>
+scrollamount属性用来设置滚动的速度，值越大，滚动的越快
+<marquee loop="1"></marquee>
+loop属性用来设置滚动的次数，默认是-1。表示无限的滚动。
+<marquee behavior="slice"></marquee> 滚动到边界就停止
+<marquee behavior="alternate"></marquee> 滚动到边界结弹回
+behavior属性用来设置滚动的内容的方式
+
+在marquee中可以添加img标签，使得img以跑马灯的方式滚动。
 
 
 
+HTML中被废弃的标签：
+先前我们讲过，html标签只是来用来添加语义，不是用来修改样式的，而以前的html中有的标签是用来修改样式的。
+所以现如今，会把一些html的样式标签废弃掉了。
 
+以下标签不提倡用
+<br> <hr> <font> 
+以下标签没有语义，都是用来修改样式的
+<b> <u> <i> <s>
+b加粗文本 bold
+u给文本添加下划线 underlined
+i文本倾斜 italic
+s文本添加删除线 strikethrough
+
+
+我们会用<p> 来取代<br>
+注意点：
+在以后企业开发中，万不得已一定不要使用这些废弃掉的标签。
+如果一定要使用，一般情况下都是用来作为CSS的钩子来使用。
+
+//下面四个标签是含有语义的
+strong == b
+ins == u
+em == i
+del == s
+strong语义：定义重要性强调的文字
+ins（inserted）语义：定义插入的文字
+em（emphasized）语义：定义强调的文字
+del（delete）语义：定义被删除的文字
+
+
+
+字符实体：
+在HTML中有的字符是被HTML保留的，有的HTML字符在HTML中是有特殊含义的，是不能在浏览器中直接显示出来的，
+那么这些东西要想显示出来就必须通过字符实体。
+
+&nbsp  空格
+&lt; 小于号  (less than)
+&gt; 大于号  (great than)
+&copy  版权
+有很多可以查W3C
+-----------------------------------------------------------------------------------
+路径是 反斜杠  /  ,因为大多操作系统都是 /
 div
 span
 br： 写多少个br标签 就换多少行
+-----------------------------------------------------------------------------------
+
+
 
 
 
@@ -2187,7 +2304,7 @@ overflow
 
 
 -----------------------------------------------------------------------------------
-路径是 反斜杠  /  ,因为大多操作系统都是 /
+
 
 
 
