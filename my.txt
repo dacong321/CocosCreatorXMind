@@ -2853,6 +2853,71 @@ a:hover{
             color:red;
         }
 
+
+
+例子2：1.使用伪类选择器选择某元素，给选择的元素添加属性的改变 2.给为类选择器选中的标签添加过渡。
+
+        .box2{
+            width: 100px;
+            height: 100px;
+            background-color: #666666;
+            animation-name: rotate;
+            margin: 0 auto;
+            margin-top: 100px;
+
+	    //-- transition 表示过渡（给改标签），属性的值代表 所要过渡的属性和时间。 transition 的翻译（名词：transition 过渡，转换）
+            /* transition: color 2s;  错误的写法，因为没有color */
+            /* transition: all 2s; */
+            /* transition-property:background-color;   */  //-- 过渡的属性
+            /* transition-duration: 5s;  */     //-- 过渡的间隔
+
+        }
+
+	//-- 使用伪类选择器给被选择的标签 添加需要被改变的属性，和属性要改变的值。
+        .box2:hover{
+            background-color:red;
+            transform: rotate(50deg);  transform的翻译： vt vi 变换，改变。
+            transform:translate(x,y)：元素在水平方向和垂直方向同时移动（X轴和Y轴同时移动）；  translate的翻译： vt vi 翻译；转化；解释；转变为；调动
+        }
+
+例子3：不用手动，用自动（动画）。不用伪类选择器选择元素，使用动画。
+
+        .box2{
+            width: 100px;
+            height: 100px;
+            background-color: #666666;
+            animation: sport 3s;       // 播放哪个动画，播放时间
+            margin: 0 auto;
+            margin-top: 100px;
+
+            /* transition: color 2s;  错误的写法，因为没有color */
+            /* transition: all 2s; */
+            /* transition-property:background-color;  
+            transition-duration: 5s;  */
+
+
+        }
+	//-- 设置的动画
+        @keyframes sport{
+            0%{
+                transform:rotate(25deg);
+            }
+            25%{
+                transform:rotate(65deg);
+            }
+            50%{
+                transform:rotate(100deg);
+            }
+            100%{
+                transform:rotate(175deg);
+            }
+
+        }
+
+        /* .box2:hover{
+            background-color:red;
+            transform: rotate(50deg);
+        } */
 -------------------------------------------------
 过渡模块的其它属性：
 ul li{
@@ -2881,7 +2946,51 @@ transition: 过渡属性 过渡时长 运动速度 延迟时间；
 
 
 -----------------------------------------------------------------------------------
+动画模块：
+        .box1{
+            width: 100px;
+            height: 50px;
+            background-color: #255;
+            animation: lnj 2s ease 1s 6;
+            /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+            // 动画名  动画执行时间  速度曲线 延迟执行时间  执行的次数  文本输入方向  指定动画等待状态和结束状态的样式
+            position: absolute;
+        }
+        @keyframes lnj{
+            /* from{
+                margin-left: 0;
+            }
+            to{
+                margin-left: 200px;
+            } */
+            0%{
+                left: 0;
+                top: 0;
+            }
+            25%{
+                left:  200px;
+                top: 0;
+            }
+            50%{
+                left: 200px;
+                top: 200px;
+            }
+            75%{
+                left: 0;
+                top: 200px;
+            }
+            100%{
+                left: 0;
+                top: 0;
+            }
+        }
 
+注意： 要加position，然后在声明的动画里使用left top才会有效。
+
+上述过渡模块有连写、简写的方式，动画模块也有。
+动画模块的三要素： 1.单独创建动画， 2.在标签内添加 动画名称， 3.在标签内添加动画间隔时间  animation:
+过渡模块的三要素： 1.单独创建选择器，指定改变所选择标签内的属性 2.在标签内添加过渡属性的名称， 3.在标签内添加过渡的时间 transition:
+-----------------------------------------------------------------------------------
 
 
                                                                                                                                                                                                                                                                                                        
@@ -2893,7 +3002,7 @@ transition: 过渡属性 过渡时长 运动速度 延迟时间；
 
 
 
-
+-----------------------------------------------------------------------------------
 跑得快的超时托管的需求说一下，
 以前的托管是：
 // 	1、无论软牌硬牌 ， 玩家有出牌权，只剩下一手牌，且不包含炸弹时，自动打出。  
