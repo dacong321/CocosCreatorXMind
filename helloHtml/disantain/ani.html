@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1{
+            width: 100px;
+            height: 50px;
+            background-color: #255;
+            animation: lnj 2s ease 1s 6;
+            /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+            position: absolute;
+        }
+        @keyframes lnj{
+            /* from{
+                margin-left: 0;
+            }
+            to{
+                margin-left: 200px;
+            } */
+            0%{
+                left: 0;
+                top: 0;
+            }
+            25%{
+                left:  200px;
+                top: 0;
+            }
+            50%{
+                left: 200px;
+                top: 200px;
+            }
+            75%{
+                left: 0;
+                top: 200px;
+            }
+            100%{
+                left: 0;
+                top: 0;
+            }
+        }
+
+        .box2{
+            width: 100px;
+            height: 100px;
+            background-color: #666666;
+            animation: sport 3s;
+            margin: 0 auto;
+            margin-top: 100px;
+            animation-fill-mode: both;
+
+            /* transition: color 2s;  错误的写法，因为没有color */
+            /* transition: all 2s; */
+            /* transition-property:background-color;  
+            transition-duration: 5s;  */
+
+
+        }
+
+        @keyframes sport{
+            0%{
+                transform:rotate(25deg);
+            }
+            25%{
+                transform:rotate(65deg);
+            }
+            50%{
+                transform:rotate(100deg);
+            }
+            100%{
+                transform:rotate(175deg);
+            }
+
+        }
+
+        /* .box2:hover{
+            background-color:red;
+            transform: rotate(50deg);
+        } */
+    </style>
+</head>
+<body>
+    <div class="box1"></div>
+    <div class="box2"></div>
+</body>
+</html>

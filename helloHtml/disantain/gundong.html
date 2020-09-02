@@ -1,0 +1,129 @@
+<!-- 练习： 图片的滚动效果 
+思路： 写架构： 使用ul il 在li中加入各个图片，加入图片后使得左浮动，所以要让ul足够大
+               若要在视觉上显示一张图片的效果，在ul外面在套一个div，将div调整成一个li的大小，在div外的部分使用 overflow:hidden 给其隐藏
+
+               可以让每个li动，也可以让ul动。
+               让ul动更加方便，1.创建动画 2.在ul中添加动画名称 间隔时间 渐变效果 延迟时间 次数等
+               让li动，1.创建动画 2.在ul中添加动画名称 间隔时间 渐变效果 延迟时间 次数等
+
+               这两种不同之处是在于li 使用postion进行移动， 因为要设置位置，利用子绝父相，要分别设置每个li的位置，然后在动画中进行相同的位移。
+               ul可以使用margin-left 进行移动
+-->
+<!-- 疑问：display:inline-block与float布局的区别
+    a.对于横向排列东西来说，我更倾向与使用inline-block来布局，因为这样清晰，也不用再像浮动那样清除浮动，害怕布局混乱等等。
+　　b.对于浮动布局就用于需要文字环绕的时候，毕竟这才是浮动真正的用武之地，水平排列的是就交给inline-block了。
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    div{
+        width: 600px;
+        height: 200px;
+        background-color: #666;
+        /* list-style: none; */
+        margin:0 auto;
+        border: orchid solid 1px;
+        /* position: relative; */
+        /* 超过div大小的部分 隐藏 */
+        overflow: hidden;
+
+    }
+    ul{
+        width: 6000px;
+        height: 200px;
+        background-color:yellow;
+        /* list-style: none; */
+        /* margin:0 auto; */
+        /* border: orchid solid 1px; */
+
+        /* position: relative; 可以利用子绝父相确定每个li的初始位置，然后注册动画进行 移动 */
+        /* 不滚动li而滚动ul */
+        animation: move 10s linear 0s infinite normal;
+        /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+    }
+    ul li{
+        
+        width: 300px; 
+        height: 200px;
+        border:springgreen solid 10px;
+        box-sizing:border-box;  /*加了边框，所以要让li宽度还是width: 300px;*/
+        /* float: left; */
+        /* 使用行内块级试一试 */
+        display: inline-block;
+        /* 使用行内块级替换了浮动后发现li之间有间隙 ,这个间隙是因为在写li标签时的回车引起的，所以可以撤回回车*/
+        margin: 0;
+        padding: 0;
+        background-color: red;
+        list-style: none;
+        /* animation: move 5s ; */
+        /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+
+        /* position: absolute; 可以利用子绝父相确定每个li的初始位置，然后注册动画进行 移动 */
+
+    }
+    @keyframes move {
+        from{
+            margin-left: 0;
+            /* left: 0; 可以利用子绝父相确定每个li的初始位置，然后注册动画进行 移动 */
+        }
+        to{
+            margin-left: -1200px;
+            /* left: 300px; 可以利用子绝父相确定每个li的初始位置，然后注册动画进行 移动 */
+        }
+    }
+    ul li:nth-child(1){
+        background-image: url(images/g1.jpg);
+    }
+    ul li:nth-child(2){
+        background-image: url(images/g2.jpg);
+    }
+    ul li:nth-child(3){
+        background-image: url(images/g3.jpg);
+    }
+    ul li:nth-child(4){
+        background-image: url(images/g4.jpg);
+    }
+    ul li:nth-child(5){
+        background-image: url(images/g1.jpg);
+    }
+    ul li:nth-child(6){
+        background-image: url(images/g2.jpg);
+    }
+    /* 鼠标移动到ul上让动画停止 */
+    div ul:hover{
+        animation-play-state:paused;
+    }
+    /* 移到ul上 让li透明 */
+    div ul:hover li{
+        opacity: 0.5;
+    }
+    /* 移到li上让li恢复 */
+    div ul li:hover{
+        opacity: 1;
+    }
+    </style>
+</head>
+<body>
+    <!-- ul要足够大，才能放入所有的图片，否则根据 浮动的顺序，占满了ul，图片会自动在下面排序 -->
+    <div>
+        <ul>
+            <li></li><li></li><li></li><li></li><li></li><li></li>
+        </ul>
+    </div>
+
+</body>
+</html>
+
+
+<!-- 　　a.上面可以看到用了display:inline-block后，存在间隙问题，这个问题产生的原因是换行引起的，因为我们写标签时通常会在标签结束符后顺手打个回车，
+    而回车会产生回车符，回车符相当于空白符，通常情况下，多个连续的空白符会合并成一个空白符，而产生“空白间隙”的真正原因就是这个让我们并不怎么注意的空白符。
+　　b.去除空隙的方法：
+　　1.对父元素添加，{font-size:0}，即将字体大小设为0，那么那个空白符也变成0px，从而消除空隙 -->

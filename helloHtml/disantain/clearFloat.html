@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    
+        /* p{
+            background-color:red;
+            height: 50px;
+            width: 50px;
+            float: left;
+        }
+        div{
+            border: 1px solid #000;
+        } */
+        .box1 {
+            background-color: red;
+            /* height: 20px; */
+            
+        }
+    
+        .box2 {
+            background-color: blue;
+            /* height: 20px; */
+            clear: left;
+        }
+    
+        .box1 p {
+            background-color: skyblue;
+            width: 100px;
+            float: left;
+        }
+    
+        .box2 p {
+            background-color:burlywood;
+            width: 100px;
+            float: left;
+            /* clear:none; */
+        }
+        /* .box2 .dd{
+            clear:left;
+        } */
+
+
+        /* <!-- 相对定位和绝对定位 --> */
+        .b1{
+            height: 100px;
+            width: 100px;
+            background-color: #225555;
+        }
+        .b2{
+            height: 100px;
+            width: 100px;
+            background-color: #4c2255;
+            position: relative;
+            left: 50px;
+        }
+        .b3{
+            height: 100px;
+            width: 100px;
+            background-color: #22ec0f;
+        }
+    </style>
+</head>
+<body>
+    <!-- <div>
+        <p></p>
+    </div> -->
+    <div class="box1">
+        <p>我是p1</p>
+        <p>我是p1</p>
+        <p>我是p1</p>
+    </div>
+
+    <div class="box2">
+        <p class="dd">我是p2</p>
+        <p>我是p2</p>
+        <p>我是p2</p>
+    </div>
+
+    <br>
+    
+    <!-- 相对定位和绝对定位 -->
+    <div class="b1"></div>
+    <div class="b2"> </div>
+    <div class="b3"> </div>
+
+</body>
+</html>

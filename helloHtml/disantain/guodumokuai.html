@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    *{
+        margin: 0;
+        padding:0;
+    }
+        /* .box0{
+            background-color: yellow;
+            height: 100px;
+            width: 100px;
+            float: left;
+        } */
+        /* .box1{
+            background-color: red;
+            height: 30px;
+            width: 300px;
+            float: left;
+        }
+        */
+        .box3{
+            background-color: brown;
+            /* height: 110px;
+            width: 110px; */
+            /* float: left; */
+        } 
+        .box1:hover{
+            background-color: blue;
+        }
+        /* //-- 隐藏添加的子元素 */
+        /* .box3::before{
+            height: 30px;
+            width: 300px;
+            background-color: #666;
+            display: block;
+            content: "ddd";
+            
+        } */
+
+        .box1 p{
+            width: 100px;
+            height: 30px;
+            background-color: skyblue;
+            float: left;
+        }
+        .box3 p{
+            width: 100px;
+            height: 30px;
+            background-color:orange;
+            float: left;
+        }
+
+        /*外墙法*/
+        /* .outer{
+            clear: both;
+        } */
+        /*内墙法*/
+        /* .inner{
+            clear: both;
+        }
+        .box3{
+            width: 300px;
+        } */
+
+                    /* height: 100px;
+            width: 10px; */
+        .box3::after{
+
+            background-color: #361542;
+            display: block;
+            content: "";
+            clear: both;
+            visibility: hidden;
+            overflow:hidden;
+        }
+
+        /* 测试浮动  */
+        .bb{
+            /* height: 3px;   */
+            /* width: 300px; */
+            border: brown solid 2px;
+        }
+        .pp{
+            background-color: yellow;
+            float: left;
+            height: 60px;
+        }
+        .bb::before{
+            height: 30px;
+            background-color:pink;
+            display: block;
+            clear: left;
+        } 
+
+        .zindex1{
+            width: 60px;
+            height: 60px;
+            background-color: red;   
+            position: relative;     
+            bottom: -10px;
+            left: 50px;
+            z-index: 1;
+
+            transition-property: width;
+            transition-duration: 5s;
+            
+        }  
+
+        .zindex2{
+            width: 60px;
+            height: 60px;
+            background-color: blue;
+            /* z-index: 100; */
+            position: relative;     
+        }
+
+        .zindex1:hover{
+            width: 200px;
+        }
+
+        ul{
+            background-color: yellow;
+            display: block;
+            width: 900px;
+            list-style: none;
+            margin:0 auto;
+    
+         }
+         li{
+            transition-property: margin-left;
+            transition-duration: 5s;
+         }
+        /* ul li:hover{ */
+        ul:hover li{
+            margin-left: 700px;
+        }
+
+        .wenzi{
+            height: 200px;
+            width: 600px;
+            margin: 0 auto;
+            margin-top: 200px;
+            background-color: yellow;
+            text-align: center;
+            line-height: 100px;
+        }
+        .wenzi span{
+            /* font-style: italic; */
+            /* float: left; */
+            /* inline-size: 50px; */
+            margin-top: 120px;
+            /* display: block; */
+            text-align: center;
+            transition: all 3s;
+            font-size: 50px;
+        }
+        .wenzi:hover span{
+            margin: 0 25px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box3">
+        
+        <p>我是文字3</p>
+        <p>我是文字3</p>
+        <p class="weiyuansu">我是文字3</p>
+        <!-- 内墙法 -->
+        <!-- <div class="inner"></div> -->
+    </div>
+
+    <!-- 外墙法 -->
+    <!-- <div class= "outer"></div> -->
+    <div class="box1">
+        <p>我是文字1</p>
+        <p>我是文字1</p>
+        <p>我是文字1</p>
+    </div>
+
+    <!-- <br>
+    <div class="bb">
+        <p class="pp">999</p>
+    </div> -->
+
+
+    <br>
+    <div class="zindex1">
+
+    </div>
+    <div class="zindex2">
+
+    </div>
+
+    <br>
+
+    <ul>
+        <li>1111</li>
+        <li>2222</li>
+        <li>3333</li>
+        <li>4444</li>
+        <li>5555</li>
+    </ul>
+
+
+    <div class="wenzi">
+        <span>我</span>
+        <span>爱</span>
+        <span>你</span>
+        <span>中</span>
+        <span>国</span>
+    </div>
+</body>
+</html>
