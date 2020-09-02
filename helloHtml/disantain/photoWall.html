@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+    *{
+        margin:0;
+        padding: 0;
+    }
+    body{
+        background:url(images/1564912856214029.jpg) no-repeat;
+        background-size: cover;    }
+    ul{
+        width: 200px;
+        height: 200px;
+        /* background-color: red; */
+        /* position: fixed;
+        right: 0;
+        bottom:0; */
+        position: absolute;
+        left: 50%;
+        bottom: 200px;
+        margin-left: -100px;
+        transform-style: preserve-3d;
+        /* transform: rotateX(-30deg); */
+        animation: sport 6s linear 0s infinite normal;
+    }
+    ul li{
+        list-style: none;
+        text-align: center;
+        font-size: 60px;
+        width: 200px;
+        height: 200px;
+        line-height: 200px;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+    ul li:nth-child(1){
+        background-color:green;
+        transform: rotateY(60deg) translateZ(200px);
+    }
+    ul li:nth-child(2){
+        background-color:yellow;
+        transform: rotateY(120deg) translateZ(200px);
+    }
+    ul li:nth-child(3){
+        background-color:rgb(54, 19, 179);
+        transform: rotateY(180deg) translateZ(200px);
+
+    }
+    ul li:nth-child(4){
+        background-color:rgb(13, 214, 97);
+        transform: rotateY(240deg) translateZ(200px);
+
+    }
+    ul li:nth-child(5){
+        background-color:rgb(146, 116, 18);
+        transform: rotateY(300deg) translateZ(200px);
+
+    }
+    ul li:nth-child(6){
+        background-color:skyblue;
+        transform:  translateZ(200px);
+    }
+
+    ul li img{
+        width: 200px;
+        height: 200px;
+    }
+    @keyframes sport {
+        from{
+            /* 动画的transform会覆盖上述的transform */
+            /* 固定的写在前面，非固定的写在后面 */
+            transform: rotateX(-30deg) rotateY(0deg);
+        }
+        to{
+            transform: rotateX(-30deg) rotateY(360deg);
+        }
+    }
+    ul:hover{
+        animation-play-state: paused;
+    }
+    ul:hover li img{
+        opacity:0.5;
+    }
+    ul li img:hover{
+        opacity: 1;
+    }
+    </style>
+</head>
+<body>
+    <!-- ul>li{$}*6 -->
+    <ul>
+        <li><img src="images/g1.jpg" alt=""></li>
+        <li><img src="images/g2.jpg" alt=""></li>
+        <li><img src="images/g3.jpg" alt=""></li>
+        <li><img src="images/g4.jpg" alt=""></li>
+        <li><img src="images/g1.jpg" alt=""></li>
+        <li><img src="images/g2.jpg" alt=""></li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .father{
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            background-color: red;
+            border: black solid 1px;
+            /* 要想要看到son旋转后近大远小的效果,给son的父节点添加 */
+            perspective: 500px;
+            /* 要想看到3d的效果 */
+            transform-style: preserve-3d;
+            transform: rotateY(80deg);
+        }
+        .son{
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            margin-top: 100px;
+            background-color: blue;
+            border: black solid 1px;
+            box-sizing: border-box;
+            transform: rotateY(45deg);
+        }
+        /* 思路
+        六面体：六个面使用ul li
+        每个li XYZ水平移动一半，然后再按照XYZ轴旋转
+
+        要给li的父节点添加3d的效果属性 transform-style
+         */
+        ul{
+            width: 200px;
+            height: 200px;
+            /* background-color:green; */
+            padding: 0;
+            margin: 0 auto;
+            list-style: none;
+            transform: rotateY(0deg) rotateX(0deg);
+            border: black solid 1px;
+            transform-style: preserve-3d;    
+
+            /* 注意：在写时间的时候要加上s单位，否则动画无效 */
+            animation: roll 5s linear 0s infinite;
+            /* animation: roll 10s linear 0s infinite normal; */
+
+            }
+        li{
+            width: 200px;
+            height: 200px;
+            font-size:large;
+            text-align: center;
+            line-height: 200px;
+
+            box-sizing: border-box;
+            position: absolute;
+            
+        }
+        ul li:nth-child(1){
+            background-color: red;
+            transform: translateX(-100px) rotateY(90deg);
+            
+        }
+        ul li:nth-child(2){
+            background-color:yellow;
+            transform: translateX(100px) rotateY(90deg);
+        }
+        ul li:nth-child(3){
+            background-color: brown;
+            transform: translateY(100px) rotateX(90deg);
+        }
+        ul li:nth-child(4){
+            background-color: skyblue;
+            transform: translateY(-100px) rotateX(90deg);
+        }
+        ul li:nth-child(5){
+            background-color: orange;
+            transform: translateZ(-100px);
+        }
+        ul li:nth-child(6){
+            background-color: pink;
+            transform: translateZ(100px);
+        }
+
+        body{
+            perspective: 500px;
+        }
+        @keyframes roll {
+            from{
+                transform: rotateX(0deg);;
+            }
+            to{
+                transform: rotateX(-360deg);;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="father">
+        <div class="son"></div>
+    </div>
+
+    <!-- 立方体测试 -->
+    <br>
+
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+
+    <!--如想要： 保持在滚动的时候，文字是正着的 -->
+    <!-- 1.先旋转：上后下前 rotateX 90 180 270 360
+         2.再移动：translateZ 100deg -->
+
+    <!-- 如果要编写长方体，则可以利用正方体，然后将上后下前增加属性  transform:scale(1.5, 1); -->
+    <!-- 然后水平移动距离 transform:translate() 增加放大的距离 -->
+    <!-- 如果想在li内添加img，则在添加完img之后要设置img的宽高，设置img的宽高和父一样就可以 -->
+
+    <!-- 如果想要加上滚动的效果则可加入动画 -->
+    <!-- 如果要想让动画有近大远小的效果，给ul滚动的父节点加上 perspective属性 -->
+</body>
+</html>
