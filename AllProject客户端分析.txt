@@ -1,0 +1,502 @@
+注意cocoscreator的生命周期函数 onLoad --> onEnable(节点第一次被创建)  -->  start ---> update ---> lateupdate --> onDisable --> onDestroy
+D:\AllProject\assets\frame\scripts\login.js
+D:\AllProject\assets\frame\scripts\init.js
+D:\AllProject\assets\frame\scripts\common\UIManager.js
+============================================================================================================================================================================
+
+D:\AllProject\assets\frame\scripts\loading.js
+//默认场景设置loading.fire
+//默认场景OnLoad 逐个由上到下依次调用。
+①Loading.js: 置于Canvas的脚本。 require("init");  在init.js脚本中加载各个组件js文件。
+jsb.fileUtils.getSearchPaths();  //-- 调用jsb 绑定的函数。jsb是javaScript bind的代表，整个测c/c++ 导出的绑定都在这个jsb里面。
+cc.sys.localStorage.setItem("hotUpdateSearch", JSON.stringify(searchPaths)); //-- 存储或读取用户数据。
+②GlobalNode.js ：globalNode目标节点位于常驻的根节点，该节点不会被在场景切换中被销毁
+cc.game.addPersistRootNode(this.node); //-- 声明常驻根节点，该节点不会被在场景切换中被销毁,所以该节点在场景切换后，此节点仍然能够显示。
+============================================================================================================================================================================
+jsb绑定： JSB 绑定简单来讲就是在C++层实现一些类库，然后经过一些特定处理可以在 JS 端进行对应方法调用的过程。
+https://www.codercto.com/a/86501.html
+============================================================================================================================================================================
+cc.sys：cc命名空间的sys模块
+cc.game：cc命名空间的game模块
+============================================================================================================================================================================
+在Loading.js中enterLoginScene进入登录页。进入后 globalNode常驻节点 包含的nomalnode节点加载预制体。
+
+加载预制体的路径是： 根路径是resources开始找。动态加载的资源都是在resources文件夹里面。
+frame/prefabs/debug
+root.addComponent(jsClass); //节点挂载脚本组件
+============================================================================================================================================================================
+我们操作这个界面：
+//操作这个界面后删除常驻节点上添加的预制体， 显示出来登录的界面 login按钮 登录：
+--> onWeixin --> connectDoor --> S: connectSuccess  -->  getSocketIpBack --> connectSuccess --> enterHallScene进入大厅场景
+
+--> 进入hall场景
+由上到下节点绑定的js文件
+Canvas节点（HallLogic.js）（createDesk.js）(joinDesk.js)
+Notice节点（Notice.js）
+
+============================================================================================================================================================================
+各个按钮的点击事件 使用Canvas节点绑定的js文件的函数（如HallLogic.js中：onCreateDesk） -->   gg.event.fire(gg.event.createDesk); 触发事先监听的事件
+								      			-->   事先在createDesk.js 的onLoad函数上注册了事件
+        								    			//-- 注册事件
+        								   			this.createDeskEvent = gg.event.on(gg.event.createDesk, this.onOpen.bind(this));
+
+											-->     onOpen函数使创建界面 显示出来。
+											{不同界面（js文件） 的相互影响用事件处理方式联系起来}
+											不同的界面一般绑定了不同的js文件
+
+============================================================================================================================================================================
+若上述：onCreateDesk --> 触发事件，使得创建牌桌的界面显示出来。则可以操作界面上的按钮切换游戏。
+
+	事先在createDesk.js 的onLoad函数上注册了事件
+ 	gg.creator.addClickEnent(btnIcon, this.node, "CreateDesk", "changeGame", i);  //动态绑定所有节点
+	//this.node 是此js文件绑定的节点，  "CreateDesk"是此js文件绑定的节点的名字
+	//btnIcon需要添加监听的组件
+	//btnIcon被点击后触发的回调changeGame
+	//因为节点是动态产生的，所以这些动态产生的节点需要动态绑定事件。
+
+（createDesk.js）
+通过点击，动态创建出来的，动态绑定事件的 节点，触发事件处理函数：changeGame。
+changeGame  --> 切换游戏，
+	    --> 因为每个游戏的游戏规则不同，则需要重新画规则界面。
+	    --->  createRule 根据配置创建游戏规则界面
+       		       创建规则所需要的：gg.global.gameConfig配置，  是在loading.js中  进入大厅 gotoHall  已经获得的数据。
+										//-- 进入大厅
+    										gotoHall() {
+											//读取规则配置文件	
+        										cc.loader.loadRes("frame/tables/gameConfig", function (err, obj) {
+            										gg.global.gameConfig = obj.json;
+            										HotUpdate.destroy();
+            										gg.common.enterLoginScene();
+        										});
+    										}
+      
+知识点： 动态创建节点，并动态绑定响应事件.  		 	 
+============================================================================================================================================================================    			
+
+
+（createDesk.js）
+//创建完游戏规则界面后，则可以点击，创建规则界面的创建房间按钮， onCreate函数被触发（按钮是固定的，是静态绑定的）。
+
+（分支一）
+	onCreate函数被触发后，onCreate函数中调用触发事件函数，函数触发 在HallLogic.js 的onLoad中设置的监听事件  
+（分支二）
+	onCreate函数被触发后，onCreate函数中通过网络，消息路由向服务端发送创建房间报文。
+
+
+
+分支一、分支二都会通过 gg.event.fire(gg.event.gotoGame);语句触发事件 进入gotoGame函数：
+调用在HallLogic.js 的监听事件处理函数函数 ：gotoGame
+
+进入游戏的步骤是：
+①预加载场景
+②初始化全局数据，gg.gggInit();
+		 1.require("initBaseMJ") 
+		 2.require("GameHelper")
+		 3.游戏独立初始化
+
+
+③挂载脚本（挂载脚本的同时会执行脚本 onLoad start函数；  当前挂载的脚本是GameControllerMJ.js脚本，脚本中首先引用了基类的js文件：require("BaseComponent") ）
+④切换场景 -->gameMJ场景,进入游戏场景。
+
+
+
+※-------------------------------------------------------------------------------
+※ 关于监听事件的使用：A.js文件中函数的操作，触发了B.js文件中的某个函数的使用。
+		    则在A.js中触发监听
+		    在B.js中添加监听，并在B.js中添加  监听事件处理函数。
+※-------------------------------------------------------------------------------
+
+切换场景后，场景逐上到下节点初始化，节点绑定的js脚本依次onLoad start update执行生命周期函数。
+
+
+在Scene.js的start函数中 addGameComponent（this.node, "Scenttt"）;
+执行程序
+Scene.js:104 		onLoad  Canvas上add的js文件
+
+Scene.js:125 		start  Canvas上add的js文件
+
+Scenttt.js:104 		onLoad  我是被addcompent的js文件
+
+Scene.js:131 		update  Canvas上add的js文件
+
+
+Scenttt.js:125 		start  我是被addcompent的js文件
+
+
+Scene.js:131 		update  Canvas上add的js文件
+
+Scenttt.js:129 		update  我是被addcompent的js文件
+
+
+如果不是addGameComponent绑定的，是直接在编辑器上加的，则从上到下按顺序
+onLoad  Canvas上add的js文件Scene.js
+onLoad  Canvas上add的js文件Scenttt.js
+
+start	Canvas上add的js文件Scene.js
+start	Canvas上add的js文件Scenttt.js
+
+update	Canvas上add的js文件Scene.js
+update	Canvas上add的js文件Scenttt.js
+
+
+========================================================================================================================================
+window.ggCtr = gg.creator.addGameComponent(canvasRoot, gg.uiManager.jsGameControllerMJ);
+window.gg = {}; 				//-- 平台全局命名空间
+window.ggBase = require("initBaseMJ");
+window.ggHelper = require("GameHelper");
+window.ggg = require(jsGameName); 		//具体游戏
+
+
+------------------------------------------------------------------------------------------------------
+客户端文件结构分析：
+
+阶段一：进入Loading.fire场景
+直接require("init");  //初始化全局使用的数据
+init.js
+===》
+window.gg = {}; //-- 平台全局命名空间
+
+//Data文件夹全部
+//-- 全局变量类
+gg.global = require("GlobalData");
+//-- 游戏数据
+gg.gameData = require("GameData");
+//-- 语言包
+gg.language = require("GameLanguage");
+//-- 游戏静态数据
+gg.const = require("GameConst");
+
+
+
+//common文件夹大部（除了GlobalNode.js）
+//-- 全局公用接口类
+gg.common = require("Common");
+//-- 引擎辅助类
+gg.creator = require("CreatorHelper");
+//-- 事件管理器
+gg.event = require("EventEmitter");
+//-- 平台类
+gg.platform = require("PlatformHelper");
+//-- ui管理器
+gg.uiManager = require("UIManager");   //UIManager.js        UI管理类
+//-- 工具类
+gg.tools = require("UtilTools");
+
+
+//network文件夹
+//-- 游戏处理器
+gg.handler = require("Handler");		***  和gg.socket的关系  ==》gg.socket 和pomelo的关系
+
+
+//case文件夹
+//-- 用户信息
+gg.user = new (require("UserInfo"));
+
+
+
+
+
+
+
+
+
+
+
+阶段二：login.fire场景
+//network文件夹另一个文件
+require("GameSocket");
+
+
+
+
+阶段三：hall.fire场景
+Canvas 绑定的js组件
+HallLogic.js
+CreateDesk.js
+joinDesk.js
+
+
+HallLogic.js中的gotogame调用  （gotogame和录像调用  gg.gggInit函数 ）
+
+gotoGame进入游戏场景之前
+{
+步骤一：
+去init.js  调用--> gg.gggInit函数
+{
+	函数内：
+	①//基类全局数据
+	window.ggBase = require("initBaseMJ")或require("initBaseZP")
+		加载的js文件中加载需要使用的各个类
+		在initBaseMJ.js文件中
+		//-- 事件
+		ggMJ.event = require("EventMJ");                                                              <***>   和Event的关系（EventMJ是Event的扩展，EventMJ可以把数据放入Event）
+		//-- 消息
+		ggMJ.handler = require("HandlerMJ");   ***   和gg.socket的关系  ==》gg.socket 和pomelo的关系  <***>   和Handler的关系（HandlerMJ是Handler的扩展）
+		//-- ui管理
+		ggMJ.uiManager = require("UIManagerMJ");  						      <***>   和UIManager的关系(UIManagerMJ是UIManager的扩展，UIManagerMJ可以把数据放入UIManager)
+		//-- 麻将辅助
+		ggMJ.helper = require("HelperMJ");
+
+
+
+	②//独立游戏全局
+	window.ggg = require("3402_init")
+	子类可以增改基类数据
+
+}
+
+
+步骤二：
+
+/*游戏麻将控制类*/：控制游戏流程， 只在gotoGame时被addGameComponent。
+window.ggCtr = gg.creator.addGameComponent(canvasRoot, gg.uiManager.jsGameControllerMJ)
+上述代码添加了组件  GameControllerMJ.js 。 BaseComponent//是游戏控制类基类
+
+这个游戏控制类控制了整个流程，所以GameControllerMJ.js里绑定了很多 脚本控件。
+如：
+CardWallMJ.js
+HandCardMJ.js
+OutCardMJ.js
+ShowCardMJ.js
+...等
+
+
+步骤三：
+	//TODO::
+	ggMJ.init
+	①资源预加载
+	// preloadRes  加载全部资源  ***
+	②子类数据的衔接（或准备）
+	//-- 注册事件
+    	ggMJ.event.register();
+    	//-- 注册消息
+    	ggMJ.handler.register();
+    	//-- 注册ui键值对
+    	ggMJ.uiManager.register();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//很多类的解析
+/*麻将牌类*/：关于牌的一系列特性
+CardMJ.js --->
+/*麻将牌墙类*/：关于牌墙的一系列特性
+CardWallMJ.js --->
+
+
+
+最后整个游戏的网络驱动：
+HandlerMJ.js  
+
+
+
+
+
+
+
+
+
+other
+============
+通过 Cookie 和 Session 技术来实现记录访问者的一些基本信息
+Cookie 是由 Web 服务器保存在用户浏览器上的小文本文件，它包含有关用户的信息
+在 Internet 中，Cookie 实际上是指小量信息，是由 Web 服务器创建的，将信息存储在用户计算机上的文件。一般网络用户习惯用其复数形式 Cookies，指某些网站为了辨别用户身份、进行 Session 跟踪而存储在用户本地终端上的数据，而这些数据通常会经过加密处理.
+
+
+
+session
+HTTP协议是无状态协议（这一次请求和上一次请求无关）
+session，从上面的描述来讲，它就是在一次会话中解决2次HTTP的请求的关联，让它们产生联系，让2两个页面都能读取到找个这个全局的session信息。session信息存在于服务器端，所以也就很好的解决了安全问题。
+
+
+
+
+===================
+var a = function(){
+      console.log(this);    // 'littledu'
+      console.log(typeof this);      //  Object
+      console.log(this instanceof String);    // true
+ }
+ a.call('littledu');
+可以看出，call了后，就把当前函数推入所传参数的作用域中去
+//直接加参数 是指把参数放在了 参数数组列表（arguments）中 ,arguments数组是一个对象
+//如果将'littledu'  提前放在一个变量中传入， 则是把这个变量 传入arguments中，在a函数中用到了这个变量名，这个变量名并不等同于arguments， 这个变量名是arguments的一部分。 他是string类型，而argumens是object类型。
+
+
+
+1 31个0
+10 00000010 00000000 00000000
+0x82020000
+
+: 0xFFFFFFFF82020
+
+
+===================
+当前平台的 监听事件  机制分析
+
+
+
+
+    //-- 创建牌桌
+    onCreateDesk(event) {
+        gg.event.fire(gg.event.createDesk); //createDesk: "f6", //-- 创建游戏桌页面
+    },
+
+
+
+/**
+ * 触发事件
+ * @param {事件key} eventName 
+ */
+EventEmitter.fire = function (eventName) {
+    var args = Array.prototype.slice.call(arguments, 1);   //导出 arguments 的参数，第二个参数1 指的是从下标1 开始导出，也就是  传入的第一个参数createDesk: "f6" 之后的参数。  
+						           //Array.prototype.slice.call(arguments, 1) 的用法arguments是数组可以使用， 当call传入的第一个参数是var arrpp={length:3,0:'first',1:'second',2:'sepcond'}; 形式的时候也可以使用。
+							   //导出的args 是['second','sepcond']
+
+
+
+    //调用自己实现的forEach
+    gg.tools.forEach(this.events[eventName], function (key, value) { //this.events[eventName] 是一个map
+        if (gg.tools.isObject(value)) {
+            value.cb.apply(value.context, args);
+            if (value.isOne) {
+                this.un([eventName, key]);
+            }
+        }
+    }.bind(this)); //this是调用function (key, value)的对象，也就是让function使用的this  。
+},
+
+
+//自己实现的forEach  ：   
+//-- 遍历map，找到所有元素，并且返回
+UtilTools.forEach = function (data, itemCallback) {
+    if (this.isFunction(itemCallback)) {
+        for (var key in data) {
+            itemCallback(key, data[key]);
+        }
+    }
+};
+
+上述forEach参数   this.events[eventName]   解析：
+
+//-- 绑定事件
+EventEmitter._bind = function (eventName, callback, context, one) {
+    let flag = 1;
+    if(gg.tools.isNull(this.events[eventName])) {
+        this.events[eventName] = {reFlag : 0};
+    } else {
+        flag++;
+    }
+    this.events[eventName][flag] = {cb:callback, isOne:one, context:context};
+    this.events[eventName].flag = flag;
+    return [eventName, flag];
+}
+
+
+//=================================上述forEach的另一种写法===========
+EventEmitter.fire = function (eventName) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    let self = this;
+    gg.tools.forEach(this.events[eventName], function (key, value) {
+        if (gg.tools.isObject(value)) {
+            value.cb.apply(value.context, args);
+            if (value.isOne) {
+                self.un([eventName, key]);
+            }
+        }
+    });
+},
+
+===============================================================
+
+
+
+
+
+
+
+//这是array的forEach
+array.forEach(function(currentValue, index, arr), thisValue) 
+参数：function(currentValue, index, arr)    必需。 数组中每个元素需要调用的函数。
+					    函数参数:
+						currentValue	必需。当前元素
+						index	可选。当前元素的索引值。
+						arr	可选。当前元素所属的数组对象。
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+cocoscreator 解析：
+  cc.director.preloadScene(gameSceneName, function (isError, asset) {
+	//sceneasset场景资产本身。
+}
+
+preloadScene时新场景的onLoad不会被执行，只有loadScene时新场景的onLoad才会执行。
+如果新场景上关联了一个prefab,那个这个prefab的图片资源也应该会自动先加载。
+如果在新场景onLoad里使用cc.loader.loadRes(url,cc.Prefab,...)这种方式的话，这个prefab的图片资源应该是后加载的。
+
+“延时加载”具体是什么原理呢？
+仅仅是将贴图之类的资源放到 onLoad 时才下载，这样就缩短了场景切换时间。
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------
+gg.global.gameConfig
+
+根据游戏的配置文件创建规则界面。
+根据游戏的配置文件创建游戏界面。
+//
+    onCreate(event) {
+        //-- 存储当前游戏数据到全局
+        gg.global.curGameConfig = gg.global.gameConfig[this.curGameConfigIndex];
+
+
+gg.global.gameConfig
+
+
+
+
+selfHand: [
+
+//-- 手牌  渲染层级，   坐标，       缩放，          字坐标，       字缩放，               字旋转角度，  字倾斜角度，        bg文件名
+//  注：   zorder,      x:y,         scaleX:scaleY,  ziX:ziY,       ziscaleX:ziscaleY,     ziRotate,     ziSkewX:ziSkewY,    bgImageName
+{ three:   "60,         1111:119,    1:1,            0:-7,          1:1,                   0,            0:0,                self_hand",       
+    two:   "50,         1073.5:119.5,1:1,            0:-7,          1:1,                   0,            0:0,                self_hand_d" }, 
+
+
+
+
+{ three: "61,1031:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,994.0:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }, 
+{ three: "62,951:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,914.5:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }, 
+{ three: "63,871:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,835.0:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }, 
+{ three: "64,791:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,755.5:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" },
+ { three: "65,711:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,676.0:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" },
+ { three: "66,631:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,596.5:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }, 
+{ three: "65,551:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,517.0:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }, 
+{ three: "64,471:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,437.5:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }, 
+{ three: "63,391:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,358.0:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }, 
+{ three: "62,311:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,278.5:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }, 
+{ three: "61,231:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,199.0:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }, 
+{ three: "60,151:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "50,119.5:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }, 
+{ three: "61,1212:119,1:1,0:-7,1:1,0,0:0,self_hand", two: "51,1171.5:119.5,1:1,0:-7,1:1,0,0:0,self_hand_d" }
+],
+
+
+
+
+
+
