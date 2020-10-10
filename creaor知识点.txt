@@ -1,0 +1,154 @@
+cocoscreator的生命周期函数：
+ onLoad --> onEnable(节点第一次被创建)  -->  start ---> update ---> lateupdate --> onDisable --> onDestroy
+============================================================================================================================================================================
+jsb绑定：
+Cocos 官方提供了 jsb.reflection.callStaticMethod 方式支持从 JS 端直接调用 Native 端（Android/iOS/Mac）的接口。
+jsb.fileUtils.getSearchPaths();  //-- 调用jsb 绑定的函数。jsb是javaScript bind的代表，整个测c/c++ 导出的绑定都在这个jsb里面。
+jsb绑定： JSB 绑定简单来讲就是在C++层实现一些类库，然后经过一些特定处理可以在 JS 端进行对应方法调用的过程。
+jsb的api在官方文档里没有。
+============================================================================================================================================================================
+动态加载资源和静态加载资源：
+放置在resources里的资源可以被静态加载（拖曳到场景），也可以被动态加载。非resources的资源只能被静态加载。
+============================================================================================================================================================================
+cc命名空间里的模块：
+cc.sys
+cc.game
+...
+...
+cc空间里有很多模块，具体可见文档。
+============================================================================================================================================================================
+注册事件，以及触发监听事件：
+//-- 注册事件
+this.createDeskEvent = gg.event.on(gg.event.createDesk, this.onOpen.bind(this));
+//-- 触发事先监听的事件
+gg.event.fire(gg.event.createDesk);
+
+---------------------------------
+上述具体的代码实现，利用js的apply特性
+//-- 绑定事件
+EventEmitter._bind = function (eventName, callback, context, one) {
+    let flag = 1;
+    if(gg.tools.isNull(this.events[eventName])) {
+        this.events[eventName] = {reFlag : 0};
+    } else {
+        flag = this.events[eventName].flag + 1;
+    }
+    let keyFlag = "flag_" + flag;
+    this.events[eventName][keyFlag] = {cb:callback, isOne:one, context:context};
+    this.events[eventName].flag = flag;
+    return [eventName, keyFlag];
+},
+
+
+/**
+ * 触发事件
+ * @param {事件key} eventName 
+ */
+EventEmitter.fire = function (eventName) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    gg.tools.forEach(this.events[eventName], function(key, value) {
+        if (gg.tools.isObject(value)) {
+            value.cb.apply(value.context, args);
+            if (value.isOne) {
+                this.un([eventName, key]);
+            }
+        }
+    }.bind(this));
+},
+※------------------------------------------------------------------
+※ 关于监听事件的使用：A.js文件中函数的操作，触发了B.js文件中的某个函数的使用。
+		    则在A.js中触发监听
+		    在B.js中添加监听，并在B.js中添加  监听事件处理函数。
+※------------------------------------------------------------------
+============================================================================================================================================================================
+动态创建节点，并动态绑定响应事件：
+
+//-- 添加点击事件
+CreatorHelper.addClickEvent = function (com, clickNode, className, clickName, param, ischeck) {
+    let eventHandler = new cc.Component.EventHandler();
+    eventHandler.target = clickNode;
+    eventHandler.component = className;
+    eventHandler.handler = clickName;
+    eventHandler.customEventData = param;
+    if (ischeck) {
+        com.checkEvents.push(eventHandler);
+    } else {
+        com.clickEvents.push(eventHandler);
+    }
+}
+---------------------------------
+例子：//动态绑定所有节点
+gg.creator.addClickEnent(btnIcon, this.node, "CreateDesk", "changeGame", i);
+//btnIcon需要添加监听的组件
+//this.node 是此js文件绑定的节点，  
+//"CreateDesk"是此js文件绑定的节点的名字
+//btnIcon被点击后触发的回调changeGame
+//i 是回调函数的参数
+
+============================================================================================================================================================================
+v2.4版本部分API：
+从v2.4开始,不建议使用 cc.loader，并且在后续的版本中也会逐渐被彻底移除，请使用新的资源管理模块 cc.assetManager 进行替换。
+cc.loader.loadRes: 加载本地资源（图片、音频、文本）
+cc.loader.load : 加载远程（图片、音频、文本）
+============================================================================================================================================================================
+挂载脚本：
+为场景中的节点挂载各种内置组件和自定义脚本组件，来实现游戏逻辑的运行和交互。
+---------------------------------
+脚本加载：
+脚本加载的同时会执行脚本 onLoad start函数；  当前节点挂载的脚本是GameControllerMJ.js，脚本中首先引用了基类的js文件：require("BaseComponent")
+切换场景的脚本加载：
+切换场景后，场景逐上到下节点初始化，节点绑定的js脚本依次onLoad start update执行生命周期函数。
+---------------------------------
+动态添加脚本的函数执行顺序：
+在Scene.js的start函数中 addGameComponent（this.node, "Scenttt"）;
+执行程序
+Scene.js:104 		onLoad  Canvas上add的js文件
+
+Scene.js:125 		start  Canvas上add的js文件
+
+Scenttt.js:104 		onLoad  我是被addcompent的js文件
+
+Scene.js:131 		update  Canvas上add的js文件
+
+
+Scenttt.js:125 		start  我是被addcompent的js文件
+
+
+Scene.js:131 		update  Canvas上add的js文件
+
+Scenttt.js:129 		update  我是被addcompent的js文件
+
+
+如果不是addGameComponent绑定的，是直接在编辑器上加的，则从上到下按顺序
+onLoad  Canvas上add的js文件Scene.js
+onLoad  Canvas上add的js文件Scenttt.js
+
+start	Canvas上add的js文件Scene.js
+start	Canvas上add的js文件Scenttt.js
+
+update	Canvas上add的js文件Scene.js
+update	Canvas上add的js文件Scenttt.js
+
+============================================================================================================================================================================
+插件脚本：
+在编辑器中，勾选脚本导入为插件，就成为插件脚本。
+成为插件脚本后，还可进一步在属性检查器设置这个插件脚本什么时候才会生效。
+允许编辑器加载选项是默认禁用的，如果编辑器中的其它普通脚本加载过程中会依赖当前脚本，则需要手动开启这个选项。
+开启后，脚本内不在任何函数内声明的局部变量 不会 暴露成全局变量，所以全局变量需要用 window.abc = 0 的方式定义才能生效。
+【发布后，脚本内不在任何函数内声明的局部变量都会暴露成全局变量（未开启“允许编辑器加载”选项）。编辑器下则和普通脚本相同。(在微信、百度、小米、支付宝、字节跳动小游戏上，局部变量不会被暴露成全局变量。如果想实现同样的效果，请确保将局部变量赋值为全局变量 window 的属性)】
+---------------------------------
+脚本加载顺序：
+---------------------------------
+目标平台兼容性：
+============================================================================================================================================================================
+全局命名空间的使用：
+window.ggCtr = gg.creator.addGameComponent(canvasRoot, gg.uiManager.jsGameControllerMJ);
+window.gg = {}; 				//-- 平台全局命名空间
+window.ggBase = require("initBaseMJ");
+window.ggHelper = require("GameHelper");
+window.ggg = require(jsGameName); 		//具体游戏
+============================================================================================================================================================================
+
+
+
+
