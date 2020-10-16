@@ -1,0 +1,96 @@
+函数数组的使用
+let funArr = new Array();
+let f1 = function(){console.log("my name is f1")};
+let f2 = function(){console.log("my name is f2")};
+funArr.push(f1);
+funArr.push(f2);
+console.log(funArr[0]); //--  输出function(){console.log("my name is f1")}
+funArr[0]();
+//------------------------------------------------------
+类：  一个键值对的一个关系
+例子1：
+let SoundMJ = {
+    name : value,
+}
+SoundMJ.func1 = function(){}
+SoundMJ["key"] = value;
+module.exports = SoundMJ; //-- 导出这个类。
+
+
+例子2： 
+module.exports = window.GG_DEFINE_CLASS("CityConfig", {
+    cityId          : "base",
+    isAll           : true,
+    getCityConfig() {
+    },
+});
+
+
+//-- 利用GG_DEFINE_CLASS函数重新构建这个类，将这个类的变量 添加get/set方法。
+//-- 定义一个静态类
+window.GG_DEFINE_CLASS = function (className, variableMap) {
+    let variableList = {};
+    let jsClass = {__className : className};
+    for (const variableName in variableMap) {
+        if (!(isLowerCase(variableName.charCodeAt(0)))) {
+            cc.error("变量首字符不是字母或者小写！& ", variableName);
+            return;
+        }
+        let variableValue = variableMap[variableName];
+        if (typeof variableValue == "function") {
+            jsClass[variableName] = variableValue;
+            continue;
+        }
+        let setFun = null;
+        let getFun = null;
+        let defaultValue = null;
+        if (!(variableValue instanceof Array) || variableValue.length == 0) {
+            defaultValue = variableValue;
+        } else {
+            defaultValue = variableValue[0];
+            setFun = variableValue[1];
+            getFun = variableValue[2];
+            if (typeof setFun != "function") {
+                cc.error("set函数类型不正确", variableName);
+                return;
+            }
+            if (typeof getFun != "function") {
+                cc.error("get函数类型不正确", variableName);
+                return;
+            }
+        }
+        variableList[variableName] = defaultValue
+        let funKey = variableName.slice(0, 1).toUpperCase() + variableName.slice(1);
+        jsClass["set" + funKey] = setFun || function (value) {
+            if (variableList[variableName] != null && typeof value != typeof variableList[variableName]) {
+                cc.error("设置数据类型与默认数据类型不符,")
+                return;
+            }
+            variableList[variableName] = value;
+        }
+        jsClass["get" + funKey] = getFun || function () {
+            return variableList[variableName];
+        }
+    }
+    return jsClass;
+}
+
+
+//------------------------------------------------------
+//-- 定义常量
+window.GG_DEFINE_CONST = function (jsClass, variableMap) {
+    for (const variableName in variableMap) {
+        jsClass[variableName] = variableMap[variableName];
+    }
+}
+
+//-- 定义变量
+GG_DEFINE_CONST(ggBase, {
+    ENUM_TUO_GUAN : cc.Enum({
+        normal      : 0,        //-- 不显示
+        select      : 1,        //-- 选择
+    }),
+});
+//------------------------------------------------------
+
+
