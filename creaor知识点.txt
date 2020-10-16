@@ -61,7 +61,7 @@ EventEmitter.fire = function (eventName) {
 		    在B.js中添加监听，并在B.js中添加  监听事件处理函数。
 ※------------------------------------------------------------------
 ============================================================================================================================================================================
-动态创建节点，并动态绑定响应事件：
+动态创建的按钮节点，并动态绑定响应事件：
 
 //-- 添加点击事件
 CreatorHelper.addClickEvent = function (com, clickNode, className, clickName, param, ischeck) {
@@ -76,15 +76,74 @@ CreatorHelper.addClickEvent = function (com, clickNode, className, clickName, pa
         com.clickEvents.push(eventHandler);
     }
 }
+//-- 触发点击事件： 按钮被点击会触发此函数。（修改了原生cc.Button.prototype._onTouchEnded ）
+//-- 此函数会，emitEvents事件，触发clickNode目标组件上的指定注册的eventHandler.handler函数。
+cc.Button.prototype._onTouchEnded = function (event) {
+    if (!this.interactable || !this.enabledInHierarchy) return;
+    if (this._pressed) {
+//-- emitEvents 触发目标组件上的指定 handler 函数，该参数是回调函数的参数值（可不填）。
+        cc.Component.EventHandler.emitEvents(this.clickEvents, event);
+        this.node.emit('click', this);  
+        this.playAudio();
+    }
+    this._pressed = false;
+    this._updateState();
+    event.stopPropagation();
+}
+
 ---------------------------------
 例子：//动态绑定所有节点
 gg.creator.addClickEnent(btnIcon, this.node, "CreateDesk", "changeGame", i);
-//btnIcon需要添加监听的组件
+//btnIcon需要添加监听的按钮组件
 //this.node 是此js文件绑定的节点，  
 //"CreateDesk"是此js文件绑定的节点的名字
 //btnIcon被点击后触发的回调changeGame
 //i 是回调函数的参数
 
+---------------------------------
+========================================================================================================================================
+cc.loader.loadRes("test Asset/prefab", function(err, prefab){ let node = cc.instantiate{prefab}});
+cc.loader.load(resUrl, function(){});
+this.node.on("mousedown", function(event){ console.log(event)}.bind(this));
+this.node.on("mousedown", function(event){ console.log(event)},this));
+
+this.node.off("mousedown", function(event){}.bind(this));
+active = true -->onEnable-->update  显示
+active = false -->ondisable -->停止update  不显示
+
+
+this.node.emit("mousedown", 事件传递参数1， 事件传递参数2， 事件传递参数3...);
+
+
+this.node.dispatchEvent(new cc.Event.EventCuston('foobar', true)); //可以做事件传递  冒泡传递，由子到父。
+ 					如遇见停止函数则停止冒泡
+
+this.node.on('foobar', function(event){
+	evenet.stopPropagation();
+});
+
+
+事件名注册 枚举类型注册
+this.node.on("事件名注册/枚举类型注册", fucntion(){});
+this.node.emit();
+
+对应的事件名 枚举对象定义
+
+
+将鼠标和触摸事件注册在补货阶段
+
+
+节点系统事件：this.node.on("事件名注册"， function(参数1，参数2, ...){});
+
+全局系统事件：  设备按键事件
+		cc.systemEvent.on("枚举类型注册"，function(){}); error第二个参数是系统定的
+		cc.systemEvent.on(cc.SystemEvent.EventType.KET_DOWN,this.onKeyDown,this);
+		设备重力传感事件
+		cc.systemEvent.on(cc.SystemEvent.DEVICEMOTION
+	
+
+
+========================================================================================================================================
 ============================================================================================================================================================================
 v2.4版本部分API：
 从v2.4开始,不建议使用 cc.loader，并且在后续的版本中也会逐渐被彻底移除，请使用新的资源管理模块 cc.assetManager 进行替换。
@@ -148,6 +207,42 @@ window.ggBase = require("initBaseMJ");
 window.ggHelper = require("GameHelper");
 window.ggg = require(jsGameName); 		//具体游戏
 ============================================================================================================================================================================
+//-- 点击某个节点的区域之外，需要执行某操作。
+    initShieldTouchData_3545() {
+        if (!ggg.isOpenShieldTouchData_3545) {
+            return;
+        }
+        let self = this;
+        //-- 一块大区域添加点击事件
+        this.node.parent.on(cc.Node.EventType.TOUCH_START, function (event) {
+            event.stopPropagation();
+            let boxRect = self.selfHandTouchNode.getBoundingBoxToWorld();
+            gg.log("boxRect = ", boxRect);
+            //点击的这一大块区域并不在这块小区域内。
+            if (!boxRect.contains(event.touch.getLocation())) {
+                console.log( "点到框外，关闭这个界面" );
+                ggCtr.resetSelfHandCardPos();
+            }
+        }, this.node);
+    }
+============================================================================================================================================================================
+渲染组件：
+
+UI组件：
+ScrollView:
+上下滑动框，创建这个UI组件的时候，在content里面会有一个一个item。当然我们可以自己编辑item放入content里面。
+PageView：
+
+
+等等
+可在官方文档查询UI组件参考。
+============================================================================================================================================================================
+设置active引发的动作：
+active = true -->onEnable-->update  显示
+active = false -->ondisable -->停止update  不显示
+============================================================================================================================================================================
+
+
 
 
 
