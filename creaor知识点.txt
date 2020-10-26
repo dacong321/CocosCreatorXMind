@@ -241,9 +241,56 @@ PageView：
 active = true -->onEnable-->update  显示
 active = false -->ondisable -->停止update  不显示
 ============================================================================================================================================================================
+https://github.com/cocos-creator/creator-docs/blob/e02ac31bab12d3ee767c0549050b0e42bd22bc5b/zh/extension/your-first-extension.md
+创建第一个扩展包(插件)：
+①创建并安装扩展包：创建扩展包结构
+hello-world
+   |-- main.js
+   |-- package.json
+②定义包描述文件:书写cocoscreator编辑器需要的配置文件 package.json
+③入口程序：main.js 这份入口程序会在CocosCreator的主进程中被加载，加载成功后会调用入口程序的load函数。
+============================================================================================================================================================================
+cocoscreator基础：
+项目结构：asset 和 package文件夹。
+编辑器基础：cocoscreator编辑器界面。
+代码编辑环境配置：VSCode 配置。
+基本工作流程： 
+①资源工作流程，各类资源的创建 导入 加载
+============================================================================================================================================================================
+cocosCreator通过一定的规则加载文件（继承文件）:
+//-- 引入游戏脚本
+CreatorHelper.requireGameJs = function (jsBase, isBackBaseJS = true) {
+    let suffix = gg.helper.getGameJsSuffix();
+    //-- 继承棋牌类型基类
+    let jsFile = this.tryRequire(jsBase + suffix + "_" + gg.global.curQipaiId);
+    if (jsFile) {
+        return jsFile;
+    }
+    //-- 直接继承平台基类
+    jsFile = this.tryRequire(jsBase + "_" + gg.global.curQipaiId);
+    if (jsFile) {
+        return jsFile;
+    }
+    //-- 平台重写基类
+    jsFile = this.tryRequire(jsBase + suffix);
+    if (jsFile) {
+        return jsFile;
+    }
+    if (isBackBaseJS) {
+        return this.tryRequire(jsBase);
+    }
+    return null;
+}
 
 
+//-- 配置，通过gg.creator.requireGameJs("ConfigMJ")得到的类型， new一个对象。
+this.config = new (gg.creator.requireGameJs("ConfigMJ"))();
 
-
+cc.Class({
+    extends: cc.Object, //-- 继承cc.Object类。
+    ctor() {
+    },
+});
+============================================================================================================================================================================
 
 
