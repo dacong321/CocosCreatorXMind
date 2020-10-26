@@ -18,12 +18,23 @@ cc.game
 cc空间里有很多模块，具体可见文档。
 ============================================================================================================================================================================
 注册事件，以及触发监听事件：
+原理：将eventName和callback对放到一个全局数组中，在触发时通过key，在对象中查找触发某个回调。
 //-- 注册事件
 this.createDeskEvent = gg.event.on(gg.event.createDesk, this.onOpen.bind(this));
 //-- 触发事先监听的事件
 gg.event.fire(gg.event.createDesk);
 
 ---------------------------------
+/**
+ * 注册事件
+ * @param {事件key} eventName 
+ * @param {回调函数} callback 
+ * @param {回调函数脚本对象} context 
+ */
+EventEmitter.on = function (eventName, callback, context) {
+    return this._bind(eventName, callback, context, false);
+},
+
 上述具体的代码实现，利用js的apply特性
 //-- 绑定事件
 EventEmitter._bind = function (eventName, callback, context, one) {
@@ -257,7 +268,21 @@ cocoscreator基础：
 基本工作流程： 
 ①资源工作流程，各类资源的创建 导入 加载
 ============================================================================================================================================================================
-cocosCreator通过一定的规则加载文件（继承文件）:
+cocosCreator通过一定的规则加载文件:
+
+//-- 尝试引入
+CreatorHelper.tryRequire = function (jsName) {
+    try {
+        let jsFile = require(jsName);
+        if (jsFile) {
+            return jsFile;
+        }
+    } catch (error) {
+        
+    }
+    return null;
+}
+
 //-- 引入游戏脚本
 CreatorHelper.requireGameJs = function (jsBase, isBackBaseJS = true) {
     let suffix = gg.helper.getGameJsSuffix();
@@ -292,5 +317,165 @@ cc.Class({
     },
 });
 ============================================================================================================================================================================
+按照一定的顺序获取js脚本文件：
+即在js中使用类似extends: cc.Object实现C++那种继承类。
+
+//-- 是否存在控件脚本
+CreatorHelper.isHaveGameComponentJs = function (jsBase) {
+    let suffix = gg.helper.getGameJsSuffix();
+    //-- 继承棋牌类型基类
+    let gameJsName = jsBase + suffix + "_" + gg.global.curQipaiId;
+    if (cc.js.getClassByName(gameJsName)) {
+        return gameJsName;
+    }
+    //-- 直接继承平台基类
+    gameJsName = jsBase + "_" + gg.global.curQipaiId;
+    if (cc.js.getClassByName(gameJsName)) {
+        return gameJsName;
+    }
+    //-- 平台重写基类
+    gameJsName = jsBase + suffix
+    if (cc.js.getClassByName(gameJsName)) {
+        return gameJsName;
+    }
+    if (cc.js.getClassByName(jsBase)) {
+        return jsBase;
+    }
+    return null;
+}
+============================================================================================================================================================================
+//-- 脚本动态绑定预制体（加载预制体后挂载脚本）：
+let DeskSet = require("DeskSet");
+cc.Class({
+    extends: DeskSet,
+    statics : {
+        prefabName : "baseMJ/prefabs/setNodeMJ",
+        prefabGoldName : "baseMJ/prefabs/setNodeGoldMJ"
+    },
+});
+上述类中的静态数据 写明了预制体的路径数据。在require时根据需求，
+去加载对应的prefab，加载后addComponent将此js文件绑定到预置体上。
+
+
+
+name: 是js文件名，此js文件可以是继承的js文件，也可以不是继承的js文件。
+
+//-- 初始化UIView
+UIManager._initView = function (name, isJS, cbFun, root, isLoack, bindJsName) {
+    //-- 回调
+    let callback = function (view, isError) {
+        if (isLoack) {
+            gg.globalNode.unlock();
+        }
+        if (cbFun) {
+            cbFun(view, isError);
+        }
+    }
+    //-- 判断是否脚本
+    let prefabName = name;
+    let jsClass = null;
+    if (isJS) {
+        //-- 是否是游戏继承类
+        // jsClass = gg.creator.requireGameJs(name);
+        jsClass = require(name);
+        prefabName = jsClass.prefabName;
+        if(ggBase.isGold && jsClass.prefabGoldName){
+            prefabName = jsClass.prefabGoldName;
+        }
+        gg.log("-----------------", prefabName);
+    }
+    //-- 预制体名为空
+    if (gg.tools.isNull(prefabName) || prefabName == "") {
+        callback(null, true);
+        return;
+    }
+    //-- 是否已经加载
+    let viewItem = this.viewList[prefabName];
+    if (viewItem) {
+        gg.log("已经加载过得预制体-----");
+        if (viewItem != normalState) {
+            gg.log("预制体正常，直接显示-----");
+            callback(viewItem);
+        }
+        return;
+    }
+    //-- 没有加载--进行加载
+    this.viewList[prefabName] = normalState;
+    if (isLoack) {
+        gg.globalNode.lock(null, 2);
+    }
+    //-- 加载
+    let self = this;
+    // gg.log("开始加载预制体", prefabName);
+    gg.creator.loadRes(prefabName, cc.Prefab, function (err, prefab) {
+        if (err) {
+            // gg.log("加载预制体失败")
+            gg.tools.remove(self.viewList, prefabName);
+            callback(null, true);
+            return;
+        }
+        //-- 已经加载完成
+        if (self.viewList[prefabName] != normalState) {
+            callback(self.viewList[prefabName]);
+            return;
+        }
+        //-- 创建对象
+        let viewNode = cc.instantiate(prefab);
+        root.addChild(viewNode);
+        let jsCom = null;
+        if (isJS) {
+            jsCom = viewNode.addComponent(jsClass);
+        } else {
+            for (let i = 0; i < viewNode._components.length; i++) {
+                let js = viewNode._components[i];
+                if (js.isRootJS && js.isRootJS()) {
+                    jsCom = js;
+                    break;
+                }
+            }
+        }
+        if (jsCom) {
+            jsCom.setViewKey(name);
+        }
+        //-- 备份 键值以及 node
+        self.prefabNameList[name] = prefabName;
+        self.viewList[prefabName] = {node:viewNode, js:jsCom, root:root};
+        callback(self.viewList[prefabName]);
+    });
+}
+============================================================================================================================================================================
+游戏分辨率适配：
+①得到手机运行环境的 设备分辨率（手机原生环境运行还是手机的web环境下运行）
+②将对应设备分辨率“宽高比”a 和 游戏当前设计分辨率“宽高比”b比对。
+③b>a  按照cc.Canvas.instance.fitWidth = true; 宽度适配
+       按照cc.Canvas.instance.fitHeight = false; 高度适配
+④特殊界面，按照适配后的宽高，重置界面的内容布局
+============================================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
