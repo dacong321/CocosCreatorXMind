@@ -2121,7 +2121,7 @@ input标签有一个type属性，这个属性有一个 hidden 类型的取值
 label标签：
 1.默认情况下文字和输入框是没有关联关系的，也就是说点击文字输入框不会聚焦，如果想点击文字时让对应的输入框聚焦，那么就需要让文字和输入框进行绑定。
 2.要想让输入框和文字绑定在一起，那么我们可以使用Label标签。
-<label for="account">账号:</label><input="text" id="account">  //label的for对应的是input的id
+<label for="account">账号:</label><input type="text" id="account">  //label的for对应的是input的id
 
 注意：我们通常是使用上面这种写法。一般不会使用<label><input typ ="text"></input></label>
 虽然上述可以实现绑定，但绑定的时候不能通过id绑定，进而不能变更绑定的对象，所以此方法有缺陷。
