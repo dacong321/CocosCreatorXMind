@@ -98,6 +98,36 @@ var o = {a:2, m:function(return this.a+1); };
 let p = Object.create(o);
 //-- p是一个继承o的对象
 //------------------------------------------------------
+立即执行函数（IIFE）的两种写法：
+(function(){}());
+(function(){})();
+IIFE函数的调用方式通常是将函数表达式 ---> “function(){}”、
+它的调用操作符 ---> "()"、
+分组操作符---> (    )放到一个括号内，
+来告诉解释器这里有一个需要立即执行的函数。否则通常情况下，解析器遇到一个function
+关键字，都会把它当做是一个函数声明，而不是函数表达式。
+
+对于常见的(function($){...})(jQuery);即是将实参jQuery传入函数function($){}，通过形参$接收。
+在立即执行函数前可添加 防御型分号。
+
+
+另一种
+$(function(){/*...*/});是$(document).ready(function(){/*...*/})的简写形式，是在DOM加载完成后执行的回调函数，并且只会执行一次。
+查jQuery的mdn得：
+jQUery使用一种格式 $(selector).action() 将元素分配给事件。为了更详细地解释它，它$(selector) 将使jQuery选择元素 selector 并将它们分配给名为 的API事件 .action()。
+再次举例：
+$(document).ready(function(){
+   alert("iHola Mundo!");
+   $("blackBox").hide();
+});
+上述代码等效于：
+window.onload = function(){
+   alert("iHola Mundo!");
+   document.getElementById("blackBox").style.display = "none";
+}
+//------------------------------------------------------
+text-encode: 文本编码转换，常见的中日韩文转换成十六进制，或者将十六进制数据转换成目标编码的文本。
+//------------------------------------------------------
 
 
 
