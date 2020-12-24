@@ -1,0 +1,11 @@
+函数数组的使用
+let funArr = new Array();
+let f1 = function(){console.log("my name is f1")};
+let f2 = function(){console.log("my name is f2")};
+funArr.push(f1);
+funArr.push(f2);
+console.log(funArr[0]); //--  输出function(){console.log("my name is f1")}
+funArr[0]();
+//------------------------------------------------------
+数组有arr.length
+对象没有  obj.length  对象的length是undefined
